@@ -1,5 +1,5 @@
 import React from "react";  
-export const Componet =()=>{
+export const Component =()=>{
     return (
         <div>
             <h1>francis lo sabe</h1>
