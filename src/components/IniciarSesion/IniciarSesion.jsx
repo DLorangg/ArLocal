@@ -1,7 +1,3 @@
-import React from 'react'
-
-export const IniciarSesion = () => {
-  return (
-    <div>IniciarSesion</div>
-  )
+export function IniciarSesion(){
+  return <div>IniciarSesion</div>;
 }
