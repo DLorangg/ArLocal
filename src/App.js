@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Bienvenida } from './components/Bienvenida/Bienvenida';
 import { IniciarSesion } from './components/IniciarSesion/IniciarSesion';
 import { CrearCuenta } from './components/CrearCuenta/CrearCuenta';
+import { AuthProvider } from './context/authContext';
 
 function App() {
   return(
