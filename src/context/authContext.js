@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
-const context = createContext()
+const context = createContext();
 
-function AuthProvider ({children}) {
-    return (
-        <context.Provider>
-            {children}
-        </context.Provider>
-    )
+export function AuthProvider({ children }) {
+    const user = {
+        login: true,
+    };
+
+    return <context.Provider value={{ user }}>{children}</context.Provider>;
 }
