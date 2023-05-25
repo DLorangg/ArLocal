@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const context = createContext();
+export const context = createContext();
 
 export function AuthProvider({ children }) {
     const user = {
