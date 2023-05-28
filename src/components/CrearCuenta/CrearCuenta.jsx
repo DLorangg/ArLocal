@@ -9,14 +9,14 @@ export function CrearCuenta() {
   });
   const { signup } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState(); 
+  const [error, setError] = useState();
 
   const handleChange = ({ target: { name, value } }) =>
     setUser({ ...user, [name]: value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('')
+    setError("");
     try {
       await signup(user.email, user.password);
       navigate("/");
@@ -24,17 +24,16 @@ export function CrearCuenta() {
       console.log(error.code);
       // Errores personalizados
       if (error.code === "auth/internal-error") {
-        setError('Correo invalido')
+        setError("Correo invalido");
       }
       if (error.code === "auth/weak-password") {
-        setError('La contraseña debe tener mínimo 6 caracteres')
+        setError("La contraseña debe tener mínimo 6 caracteres");
       }
     }
   };
 
   return (
     <div>
-
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -52,7 +51,7 @@ export function CrearCuenta() {
           id="password"
           placeholder="******"
           onChange={handleChange}
-        />  
+        />
 
         <button>Register</button>
       </form>
