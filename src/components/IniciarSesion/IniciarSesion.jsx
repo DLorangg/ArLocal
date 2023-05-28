@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
-export function CrearCuenta() {
+export function IniciarSesion() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -18,7 +18,7 @@ export function CrearCuenta() {
     e.preventDefault();
     setError("");
     try {
-      await signup(user.email, user.password);
+      await login(user.email, user.password);
       navigate("/");
     } catch (error) {
       console.log(error.code);
@@ -53,7 +53,7 @@ export function CrearCuenta() {
           onChange={handleChange}
         />
 
-        <button>Register</button>
+        <button>Login</button>
       </form>
     </div>
   );
