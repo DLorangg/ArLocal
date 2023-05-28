@@ -6,7 +6,6 @@ import {AuthProvider} from './context/authContext';
 
 function App() {
   return(
-    <div className='bg-slate-300 h-screen text-white flex'>
       <AuthProvider>
       <Routes>
         <Route path="/" element={<Bienvenida/>} />
@@ -14,7 +13,6 @@ function App() {
         <Route path="/register" element={<CrearCuenta/>} />
       </Routes>
       </AuthProvider>
-    </div>
   )
 }
 
