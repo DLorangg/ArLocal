@@ -6,12 +6,16 @@ export function CrearCuenta() {
     password: "",
   });
 
-  const handleChange = ({target: {name, value}}) => {
+  const handleChange = ({target: {name, value}}) => 
     setUser({...user, [name]: value})
-  };
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    console.log(user);
+  }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="email">Email</label>
       <input
         type="email"
