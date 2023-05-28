@@ -20,8 +20,14 @@ export function CrearCuenta() {
       await signup(user.email, user.password);
       navigate("/");
     } catch (error) {
-      setError(error.message)
-      console.log(error);
+      console.log(error.code);
+      // Errores personalizados
+      if (error.code === "auth/internal-error") {
+        setError('Correo invalido')
+      }
+      if (error.code === "auth/weak-password") {
+        setError('La contraseña debe tener mínimo 6 caracteres')
+      }
     }
   };
 
