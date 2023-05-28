@@ -1,40 +1,53 @@
 import { useState } from "react";
-import { useAuth } from '../../context/authContext'
+import { useAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export function CrearCuenta() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const {signup} = useAuth()
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState(); 
 
-  const handleChange = ({target: {name, value}}) => 
-    setUser({...user, [name]: value})
+  const handleChange = ({ target: { name, value } }) =>
+    setUser({ ...user, [name]: value });
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    signup(user.email, user.password)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signup(user.email, user.password);
+      navigate("/");
+    } catch (error) {
+      setError(error.message)
+      console.log(error);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email</label>
-      <input
-        type="email"
-        name="email"
-        placeholder="youremail@company.com"
-        onChange={handleChange}
-      />
+    <div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        onChange={handleChange}
-      />
+      {error && <p>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="youremail@company.com"
+          onChange={handleChange}
+        />
 
-      <button>Register</button>
-    </form>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={handleChange}
+        />  
+
+        <button>Register</button>
+      </form>
+    </div>
   );
 }
