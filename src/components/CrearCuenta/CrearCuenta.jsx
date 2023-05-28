@@ -16,6 +16,7 @@ export function CrearCuenta() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('')
     try {
       await signup(user.email, user.password);
       navigate("/");
@@ -49,6 +50,7 @@ export function CrearCuenta() {
           type="password"
           name="password"
           id="password"
+          placeholder="******"
           onChange={handleChange}
         />  
 
