@@ -1,8 +1,8 @@
-import { Button_Social } from './components/Boton/Boton';
+import { Button_Next } from './components/Boton/Boton';
 function App() {
   return (
     <div className="App">
-      <Button_Social/>
+      <Button_Next/>
     </div>
   );
 }
