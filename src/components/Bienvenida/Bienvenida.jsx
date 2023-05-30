@@ -3,13 +3,15 @@ import {useAuth} from '../../context/authContext'
 
 export function Bienvenida () {
 
-  const {user, logout} = useAuth()
+  const {user, logout, loading} = useAuth()
    const navigate = useNavigate()
   
   const handleLogout = async () => {
     await logout();
-    navigate("/");
-  }
+    navigate("/login");
+  };
+
+  if (loading) return <h1>cargando...</h1>
 
   return <div>
     <h1>Bienvenido {user.email}</h1>
