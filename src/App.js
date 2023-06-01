@@ -1,8 +1,9 @@
 import { Button_Next } from './components/Boton/Boton';
+import { Login } from './components/IniciarSesion/IniciarSesion'
 function App() {
   return (
     <div className="App">
-      <Button_Next/>
+      <Login/>
     </div>
   );
 }
