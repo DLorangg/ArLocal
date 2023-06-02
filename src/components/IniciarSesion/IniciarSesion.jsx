@@ -7,7 +7,7 @@ export function IniciarSesion() {
     email: "",
     password: "",
   });
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -32,6 +32,10 @@ export function IniciarSesion() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    await googleLogin()
+  }
+
   return (
     <div>
       {error && <p>{error}</p>}
@@ -55,6 +59,8 @@ export function IniciarSesion() {
 
         <button>Login</button>
       </form>
+
+      <button onClick={handleGoogleSignIn}>Google</button>
     </div>
   );
 }
