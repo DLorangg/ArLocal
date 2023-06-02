@@ -7,14 +7,18 @@ export function Bienvenida () {
    const navigate = useNavigate()
   
   const handleLogout = async () => {
-    await logout();
-    navigate("/login");
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   if (loading) return <h1>cargando...</h1>
 
   return <div>
-    <h1>Bienvenido {user.email}</h1>
+    <h1>Bienvenido {user.displayName || user.email}</h1>
 
     <button onClick={handleLogout}>
       Cerrar sesión
