@@ -33,7 +33,8 @@ export function IniciarSesion() {
   };
 
   const handleGoogleSignIn = async () => {
-    await googleLogin()
+    await googleLogin();
+    navigate("/");
   }
 
   return (
