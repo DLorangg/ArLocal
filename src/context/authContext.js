@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   signOut,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 
@@ -29,21 +29,23 @@ export function AuthProvider({ children }) {
   const logout = () => signOut(auth);
 
   const googleLogin = () => {
-    const googleProvider = new GoogleAuthProvider()
-    return signInWithPopup(auth, googleProvider)
-  }
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false)
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <authContext.Provider value={{ signup, login, user, logout, loading, googleLogin }}>
+    <authContext.Provider
+      value={{ signup, login, user, logout, loading, googleLogin }}
+    >
       {children}
     </authContext.Provider>
   );
