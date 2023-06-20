@@ -1,18 +1,22 @@
 import react from "react";
-import { View, Text, Image } from "react-native";
-import locales from "./data/Locales";
+import { View, Text, Image, FlatList } from "react-native";
+import locales from "./data/locales";
 
 const LocalesList = () =>{
     return(
-        <View>
-            {locales.map(local =>(
-                <View key={local.id}>
+        <FlatList
+        data={locales}
+        renderItem={({item: local})=>(
+            <View key={local.id}>
                     <Text>{local.nombre}</Text>
-
+                    <Text>{local.categoria}</Text>
+                    <Text>{local.direccion}</Text>
+                    {/* <Image
+                    source={local.img}/> */}
+                    
+                    
                 </View>
-            )
-            )}
-        </View>
+        )}/>
     )
 }
 

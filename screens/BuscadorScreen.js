@@ -1,12 +1,12 @@
 import React from "react";
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import LocalesList from "../src/components/localesList";
+import LocalesList from '../src/components/LocalesList'
 const BuscadorScreen =()=>{
 
   return(
 
     <View style={styles.container}>
-      <Text style={styles.title}>BuscadorScreen</Text>
+
       <LocalesList/>
     </View>
   ) 
