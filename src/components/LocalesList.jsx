@@ -1,5 +1,5 @@
 import react from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import {Text, FlatList } from "react-native";
 import locales from "./data/locales";
 import LocalesItem from "./LocalesItem";
 

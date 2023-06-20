@@ -1,5 +1,5 @@
 import react from "react";
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 const LocalesItem=(props)=>(
     <View key={props.id} style={{padding:20, paddingBottom:5, paddingTop:5}}>
