@@ -16,10 +16,8 @@ const Tab= createBottomTabNavigator()
 const ConfiguracionStackNavigator= createNativeStackNavigator();
 function MyStack(){
     return(
-        <ConfiguracionStackNavigator.Navigator
-            initialRouteName="Configuraciones"
+        <ConfiguracionStackNavigator.Navigator initialRouteName="Configuraciones">
             
-        >
             <ConfiguracionStackNavigator.Screen
                 name="Configuraciones"
                 component={ConfiguracionesScreen}

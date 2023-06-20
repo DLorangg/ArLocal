@@ -6,9 +6,11 @@ const LocalesList = () =>{
     return(
         <FlatList
         data={locales}
+        ItemSeparatorComponent={()=><Text></Text>}
         renderItem={({item: local})=>(
-            <View key={local.id}>
-                    <Text>{local.nombre}</Text>
+            <View key={local.id} style={{padding:20, paddingBottom:5, paddingTop:5}}>
+                    <Text style={{fontWeight:'bold', marginBottom:5}}>{local.nombre}</Text>
+                    <Text>@{local.id}</Text>
                     <Text>{local.categoria}</Text>
                     <Text>{local.direccion}</Text>
                     {/* <Image
