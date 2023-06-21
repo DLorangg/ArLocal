@@ -21,6 +21,8 @@ function MyStack(){
             <ConfiguracionStackNavigator.Screen
                 name="Configuraciones"
                 component={ConfiguracionesScreen}
+                options={{ headerShown: false }}
+
             />
             <ConfiguracionStackNavigator.Screen
                 name="Configuracion1"
@@ -55,7 +57,8 @@ function MyTabs() {
                     tabBarIcon: ({color, size})=>(
                         
                         <MaterialCommunityIcons name="star" size={size} color={color} />
-                    )
+                    ),
+                    headerShown: false
                 }}
             />
             <Tab.Screen 
@@ -66,7 +69,8 @@ function MyTabs() {
                     tabBarIcon: ({color, size})=>(
                         
                         <MaterialCommunityIcons name="camera" size={size} color={color} />
-                    )
+                    ),
+                    headerShown: false
                 }}
             />
             <Tab.Screen 
@@ -77,7 +81,8 @@ function MyTabs() {
                     tabBarIcon: ({color, size})=>(
                         
                         <FontAwesome name="search" size={size} color={color} />
-                    )
+                    ),
+                    headerShown: false
                 }}
             />
             <Tab.Screen 
