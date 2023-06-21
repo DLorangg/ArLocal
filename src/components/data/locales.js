@@ -162,7 +162,7 @@ export default [
     },
     {
         id:'alta_moda_santi',
-        nombre:'Santi Gay',
+        nombre:'Santa Gay',
         categoria:'ropa inclusiva',
         direccion:'santa puta 9523',
         img:'https://picsum.photos/200'

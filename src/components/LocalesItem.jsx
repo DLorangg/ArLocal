@@ -4,7 +4,13 @@ const styles = StyleSheet.create({
     contenedor: {
         padding:20,
         paddingBottom:5,
-        paddingTop:5
+        paddingTop:5,
+        flexDirection:'row'
+    },
+    cuerpo:{
+        padding:20,
+        paddingBottom:5,
+        paddingTop:5,
     },
     titulo:{
         fontWeight:'bold', 
@@ -25,18 +31,16 @@ const styles = StyleSheet.create({
     }
 })
 const LocalesItem=(props)=>(
-    <View key={props.id} style={styles.contenedor}>
+<View key={props.id} style={styles.contenedor}>
     <Image style={styles.imagen} source={{uri: props.img}}/>
-    <Text style={styles.titulo}>{props.nombre}</Text>
-    <Text>@{props.id}</Text>
-    <View style={styles.categoria}>
-    <Text >{props.categoria}</Text>
+    <View style={styles.cuerpo}>
+        <Text style={styles.titulo}>{props.nombre}</Text>
+        <View style={styles.categoria}>
+            <Text >{props.categoria}</Text>
+        </View>
+        <Text>{props.direccion}</Text>
     </View>
-    <Text>{props.direccion}</Text>
-    {/* <Image
-    source={local.img}/> */}
-    
-    
+
 </View>
 )
 export default LocalesItem
