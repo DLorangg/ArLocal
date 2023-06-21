@@ -2,10 +2,11 @@ import react from "react";
 import {ViewPropTypes, StyleSheet, Text, Image} from 'react-native'
 import Constants from 'expo-constants'
 import { View } from "react-native";
+import {useFonts} from 'expo-font'
 const styles = StyleSheet.create({
     contenedor:{
         backgroundColor:'#5C4999',
-        paddingTop: Constants.statusBarHeight +30,
+        paddingTop: Constants.statusBarHeight,
         paddingBottom: 10,
         paddingLeft: 10,
         flexDirection: 'row'
