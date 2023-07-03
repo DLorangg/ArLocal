@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -48,7 +48,7 @@ function MyTabs() {
             screenOptions={{
                 tabBarActiveTintColor: '#519955',
                 tabBarInactiveTintColor: '#6EE674',
-                tabBarStyle: { backgroundColor:'#5C4999', height: 62 }
+                tabBarStyle: { backgroundColor:'#5C4999', height: 62}
 
             }}
         >
@@ -107,8 +107,14 @@ function MyTabs() {
 
 export default function Navigation(){
     return(
-        <NavigationContainer >
+        <NavigationContainer  theme={MyTheme}>
             <MyTabs />
         </NavigationContainer>
     )
 }
+const MyTheme = {
+    // dark: true,
+    colors: {
+      background: '#5C4999'
+    },
+  };
