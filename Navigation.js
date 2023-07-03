@@ -13,6 +13,7 @@ import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
 const Tab= createBottomTabNavigator()
+const color ='#6EE674'
 const ConfiguracionStackNavigator= createNativeStackNavigator();
 function MyStack(){
     return(
@@ -45,8 +46,10 @@ function MyTabs() {
         <Tab.Navigator
             initialRouteName="Buscar"
             screenOptions={{
-                tabBarActiveTintColor: 'purple'
-                
+                tabBarActiveTintColor: '#519955',
+                tabBarInactiveTintColor: '#6EE674',
+                tabBarStyle: { backgroundColor:'#5C4999', height: 62 }
+
             }}
         >
             <Tab.Screen 
@@ -104,8 +107,8 @@ function MyTabs() {
 
 export default function Navigation(){
     return(
-        <NavigationContainer>
-            <MyTabs/>
+        <NavigationContainer >
+            <MyTabs />
         </NavigationContainer>
     )
 }
