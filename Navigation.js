@@ -113,7 +113,7 @@ export default function Navigation(){
     )
 }
 const MyTheme = {
-    // dark: true,
+    dark: true,
     colors: {
       background: '#5C4999'
     },

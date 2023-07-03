@@ -5,6 +5,9 @@ import { View } from "react-native";
 import * as Font from 'expo-font';
 
 const AppBar = () => {
+
+  //#region 
+  //fuentes zzZZZzz
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const AppBar = () => {
   if (!fontsLoaded) {
     return null;
   }
-
+  //#endregion
   return (
     <View style={styles.contenedor}>
       <Image
