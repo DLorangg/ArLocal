@@ -2,10 +2,12 @@ import react from "react";
 import {Text, View, StyleSheet,Image} from 'react-native';
 const styles = StyleSheet.create({
     contenedor: {
-        padding:20,
-        paddingBottom:5,
-        paddingTop:5,
-        flexDirection:'row'
+        padding:15,
+        marginLeft: 15,
+        marginRight: 15,
+        flexDirection:'row',
+        backgroundColor: '#9C85E6',
+        borderRadius: 5
     },
     cuerpo:{
         padding:20,
