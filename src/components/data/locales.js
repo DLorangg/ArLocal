@@ -29,7 +29,7 @@ export default [
     },
     {
         id:'kioskito.de.las.capitales',
-        nombre:'Charly y Luis Cigarros 24/7',
+        nombre:'Charly y Luis Cigarros',
         categoria:'kiosco',
         direccion:'peperina 869',
         img:'https://picsum.photos/200'
@@ -64,7 +64,7 @@ export default [
     },
     {
         id:'kioskito.de.las.capitales',
-        nombre:'Charly y Luis Cigarros 24/7',
+        nombre:'Charly y Luis Cigarros',
         categoria:'kiosco',
         direccion:'peperina 869',
         img:'https://picsum.photos/200'
@@ -99,7 +99,7 @@ export default [
     },
     {
         id:'kioskito.de.las.capitales',
-        nombre:'Charly y Luis Cigarros 24/7',
+        nombre:'Charly y Luis Cigarros',
         categoria:'kiosco',
         direccion:'peperina 869',
         img:'https://picsum.photos/200'
@@ -134,7 +134,7 @@ export default [
     },
     {
         id:'kioskito.de.las.capitales',
-        nombre:'Charly y Luis Cigarros 24/7',
+        nombre:'Charly y Luis Cigarross',
         categoria:'kiosco',
         direccion:'peperina 869',
         img:'https://picsum.photos/200'
@@ -169,7 +169,7 @@ export default [
     },
     {
         id:'kioskito.de.las.capitales',
-        nombre:'Charly y Luis Cigarros 24/7',
+        nombre:'Charly y Luis Cigarros',
         categoria:'kiosco',
         direccion:'peperina 869',
         img:'https://picsum.photos/200'
