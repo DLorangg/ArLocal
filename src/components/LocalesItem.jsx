@@ -30,9 +30,9 @@ const LocalesItem = (props) => {
       <View style={styles.cuerpo}>
         <Text style={styles.titulo}>{props.nombre}</Text>
         <View style={styles.categoria}>
-          <Text>{props.categoria}</Text>
+          <Text style={styles.textoCategoria}>{props.categoria}</Text>
         </View>
-        <Text>{props.direccion}</Text>
+        <Text style={styles.direccion}>{props.direccion}</Text>
       </View>
     </View>
   );
@@ -56,17 +56,28 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontFamily: 'kraash-black',
-    fontSize: 7,
+    fontSize: 9,
     marginBottom: 5,
-    color: '#FFF'
+    color: '#FFF',
   },
   categoria: {
     backgroundColor: '#5C4999',
-    // fontFamily: 'kraash-black',
-    // fontSize: 7,
     padding: 4,
     alignSelf: 'flex-start',
     borderRadius: 4
+  },
+  textoCategoria:{
+    fontFamily: 'kraash-black',
+    fontSize: 6,
+    color: '#9C85E6'
+
+  },
+  direccion:{
+    fontFamily: 'arial',
+    fontSize: 12,
+    color: '#FFF',
+
+
   },
   imagen: {
     width: 150,
