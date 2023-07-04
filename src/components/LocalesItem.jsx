@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
 
   },
   direccion:{
-    fontFamily: 'arial',
     fontSize: 12,
     color: '#FFF',
 

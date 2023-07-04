@@ -1,16 +1,22 @@
-import React from "react";
-import {View} from 'react-native';
-import LocalesList from '../src/components/LocalesList'
-const BuscadorScreen =()=>{
+import React, { useEffect } from "react";
+import { View } from 'react-native';
+import LocalesList from '../src/components/LocalesList';
+import { useNavigation } from "@react-navigation/native";
 
-  return(
+const BuscadorScreen = () => {
+  const navigation = useNavigation();
 
-    <View >
+  useEffect(() => {
+    navigation.setOptions({
 
-      <LocalesList/>
+    });
+  }, [navigation]);
+
+  return (
+    <View>
+      <LocalesList />
     </View>
-  ) 
+  );
 };
-
 
 export default BuscadorScreen;
