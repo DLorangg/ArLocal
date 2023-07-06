@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { Alerta } from "../Alerta/Alerta";
 
 export function IniciarSesion() {
   const [user, setUser] = useState({
@@ -21,7 +22,7 @@ export function IniciarSesion() {
       await login(user.email, user.password);
       navigate("/");
     } catch (error) {
-      console.log(error.code);
+      setError(error.message);
       // Errores personalizados
       if (error.code === "auth/internal-error") {
         setError("Correo invalido");
@@ -46,17 +47,16 @@ export function IniciarSesion() {
       <section className="flex flex-col md:flex-row h-screen items-center">
 
         <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-          <img src="https://source.unsplash.com/random" alt="" className="w-full h-full object-cover"/>
+          <img src="https://source.unsplash.com/random" className="w-full h-full object-cover"/>
         </div>
 
         <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12  flex items-center justify-center">
 
           <div className="w-full h-100">
 
-
+            
             <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Ingresa a su Cuenta</h1>
 
-            {error && <p>{error}</p>}
             <form className="mt-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-gray-700">Correo Electrónico</label>
@@ -74,6 +74,7 @@ export function IniciarSesion() {
 
               <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Ingresar</button>
             </form>
+            {error && <Alerta message={error} />}
 
             <hr className="my-6 border-gray-300 w-full"/>
 

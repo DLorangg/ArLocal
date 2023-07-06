@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { Alerta } from "../Alerta/Alerta";
 
 export function CrearCuenta() {
   const [user, setUser] = useState({
@@ -55,8 +56,7 @@ export function CrearCuenta() {
 
 
           <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Crear una Cuenta</h1>
-          
-          {error && <p>{error}</p>}
+      
           <form className="mt-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-gray-700">Correo Electrónico</label>
@@ -70,6 +70,7 @@ export function CrearCuenta() {
 
             <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Crear Cuenta</button>
           </form>
+          {error && <Alerta message={error} />}
 
           <hr className="my-6 border-gray-300 w-full"/>
 
