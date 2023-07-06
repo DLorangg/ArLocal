@@ -127,13 +127,3 @@ export function IniciarSesion() {
     </div>
   );
 }
-
-/*
-          onChange={handleChange}
-
-        <button>Login</button>
-      </form>
-
-      <button onClick={handleGoogleSignIn}>Google</button>
-    </div>
-*/
