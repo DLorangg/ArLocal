@@ -7,7 +7,7 @@ export function CrearCuenta() {
     email: "",
     password: "",
   });
-  const { signup } = useAuth();
+  const { signup, googleLogin } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -27,8 +27,17 @@ export function CrearCuenta() {
         setError("Correo invalido");
       }
       if (error.code === "auth/weak-password") {
-        setError("La contraseña debe tener mínimo 6 caracteres");
+        setError("La contraseña debe tener mínimo 8 caracteres");
       }
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleLogin();
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
     }
   };
 
