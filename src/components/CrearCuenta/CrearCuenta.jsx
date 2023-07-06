@@ -51,12 +51,17 @@ export function CrearCuenta() {
           <form className="mt-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-gray-700">Correo Electrónico</label>
-                <input type="email" name="email" placeholder="Ingresa Correo Electrónico" onChange={handleChange} className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required/>
+                <input type="email" name="" id="" placeholder="Ingresa Correo Electrónico" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required/>
             </div>
 
             <div className="mt-4">
               <label className="block text-gray-700">Contraseña</label>
-              <input type="password" name="password" placeholder="Ingresa Contraseña" onChange={handleChange} minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
+              <input type="password" name="" id="" placeholder="Ingresa Contraseña" minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-gray-700">Confirmar Contraseña</label>
+              <input type="password" name="" id="" placeholder="Confirmar Contraseña" minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
             </div>
 
             <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Crear Cuenta</button>
@@ -116,12 +121,24 @@ export function CrearCuenta() {
 }
 
 /*
+  <div>
+        <input
+          type="email"
+          name="email"
+          placeholder="youremail@company.com"
+          onChange={handleChange}
+        />
+
         <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           id="password"
           placeholder="******"
-          
+          onChange={handleChange}
         />
+
+        <button>Register</button>
+      </form>
+    </div>
 */
