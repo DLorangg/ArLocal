@@ -114,18 +114,3 @@ export function CrearCuenta() {
   </div>
   );
 }
-
-/*
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="******"
-          
-        />
-
-        <button>Register</button>
-      </form>
-    </div>
-*/
