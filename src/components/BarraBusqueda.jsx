@@ -3,9 +3,10 @@ import {SafeAreaView, StyleSheet, TextInput, View, Text} from 'react-native';
 
 const BarraBusqueda = () =>{
     const [text, onChangeText] = React.useState('Useless Text');
-
+    // const [number, onChangeNumber] = React.useState('');
+  
     return (
-        <SafeAreaView>
+      <SafeAreaView>
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}
@@ -13,9 +14,16 @@ const BarraBusqueda = () =>{
         />
 
       </SafeAreaView>
-    )
-
-
-}
+    );
+  };
+  
+  const styles = StyleSheet.create({
+    input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+    },
+  });
 
 export default BarraBusqueda;
