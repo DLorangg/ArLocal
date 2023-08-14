@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View } from 'react-native';
+import { View, Text} from 'react-native';
 import LocalesList from '../src/components/LocalesList';
 import { useNavigation } from "@react-navigation/native";
 
@@ -14,6 +14,7 @@ const BuscadorScreen = () => {
 
   return (
     <View>
+
       <LocalesList />
     </View>
   );
