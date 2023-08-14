@@ -3,7 +3,6 @@ import {SafeAreaView, StyleSheet, TextInput, View, Text} from 'react-native';
 
 const BarraBusqueda = () =>{
     const [text, onChangeText] = React.useState('');
-    // const [number, onChangeNumber] = React.useState('');
   
     return (
       <SafeAreaView>
