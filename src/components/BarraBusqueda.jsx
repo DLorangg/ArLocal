@@ -11,7 +11,7 @@ const BarraBusqueda = () =>{
           onChangeText={onChangeText}
           value={text}
         />
-
+        <Text style={styles.text}>{text}</Text>
       </SafeAreaView>
     );
   };
