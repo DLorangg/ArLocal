@@ -23,6 +23,10 @@ const BarraBusqueda = () =>{
       borderWidth: 1,
       padding: 10,
     },
+    text: {
+        margin: 12,
+        fontSize: 16,
+      },
   });
 
 export default BarraBusqueda;
