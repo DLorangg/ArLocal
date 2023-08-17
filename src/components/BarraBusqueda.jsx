@@ -3,6 +3,10 @@ import {SafeAreaView, StyleSheet, TextInput, View, Text} from 'react-native';
 
 const BarraBusqueda = ({ actualizarTextoBusqueda }) =>{
   const [texto, setTexto] = React.useState('');
+
+  const handleActualizarTexto = (nuevoTexto) => { //funcion para cuando se actualice el texto
+
+  };
   
     return (
       <SafeAreaView>
