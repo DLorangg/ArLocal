@@ -30,3 +30,4 @@ const BarraBusqueda = () =>{
   });
 
 export default BarraBusqueda;
+

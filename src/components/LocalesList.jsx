@@ -14,6 +14,18 @@ const busqueda= (locales, input) =>{
         }
     } )
 }
+
+// function filtrarNombre(productos) {
+//     const inputFiltrado = document.getElementById('inputFiltrado')
+//     let busqueda
+//     let rta;
+//     inputFiltrado.addEventListener('keyup', function() {
+//         busqueda = inputFiltrado.value;
+//         rta = productos.filter((producto) => producto.nombre.toLowerCase().includes(busqueda.toLowerCase()))
+//         listarProductos(rta, menu, true)
+//     })
+
+// }
 //<-weas
     return(
         <FlatList
