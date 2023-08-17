@@ -3,7 +3,6 @@ import { View, Text} from 'react-native';
 import LocalesList from '../src/components/LocalesList';
 import { useNavigation } from "@react-navigation/native";
 import BarraBusqueda from "../src/components/BarraBusqueda";
-import Prueba from "../src/components/Prueba";
 
 const BuscadorScreen = () => {
   const [textoBusqueda, setTextoBusqueda] = React.useState(''); //estado para el texto de la barra de busqueda
@@ -29,7 +28,6 @@ const BuscadorScreen = () => {
       <BarraBusqueda actualizarTextoBusqueda={handleActualizarTextoBusqueda}/>
       <Text>{textoBusqueda}</Text>
 
-      <Prueba busqueda={textoBusqueda}/>
       <LocalesList busqueda={textoBusqueda}/>
     </View>
   );
