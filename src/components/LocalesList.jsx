@@ -28,14 +28,14 @@ const busqueda= (locales, input) =>{
 // }
 //<-weas
     return(
-        // <FlatList
-        // data={locales}
-        // ItemSeparatorComponent={()=><Text></Text>}
-        // renderItem={({item: local})=>(
-        //     <LocalesItem {... local}/>
+        <FlatList
+        data={locales}
+        ItemSeparatorComponent={()=><Text></Text>}
+        renderItem={({item: local})=>(
+            <LocalesItem {... local}/>
 
-        // )}/>
-        <Text>{textoBusqueda}</Text>
+        )}/>
+
     )
 }
 
