@@ -2,17 +2,17 @@ import React from "react";
 import {SafeAreaView, StyleSheet, TextInput, View, Text} from 'react-native';
 
 const BarraBusqueda = () =>{
-    const [text, onChangeText] = React.useState('');
+  const [texto, setTexto] = React.useState('');
   
     return (
       <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-        />
-        <Text style={styles.text}>{text}</Text>
-      </SafeAreaView>
+      <TextInput
+        style={styles.input}
+        onChangeText={handleActualizarTexto} // Usa la nueva función de cambio de texto
+        value={texto}
+      />
+      {/* <Text style={styles.text}>{texto}</Text> */}
+    </SafeAreaView>
     );
   };
   
