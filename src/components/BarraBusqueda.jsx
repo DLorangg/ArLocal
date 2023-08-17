@@ -6,6 +6,7 @@ const BarraBusqueda = ({ actualizarTextoBusqueda }) =>{
 
   const handleActualizarTexto = (nuevoTexto) => { //funcion para cuando se actualice el texto
     setTexto(nuevoTexto); //cambia el estado del texto
+    actualizarTextoBusqueda(nuevoTexto); // Llama a la función de devolución de llamada del padre
 
   };
   
