@@ -5,6 +5,12 @@ import { useNavigation } from "@react-navigation/native";
 import BarraBusqueda from "../src/components/BarraBusqueda";
 
 const BuscadorScreen = () => {
+  const [textoBusqueda, setTextoBusqueda] = React.useState(''); //estado para el texto de la barra de busqueda
+
+
+
+
+
   const navigation = useNavigation();
 
   useEffect(() => {
