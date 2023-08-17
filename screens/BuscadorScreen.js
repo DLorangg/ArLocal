@@ -6,7 +6,10 @@ import BarraBusqueda from "../src/components/BarraBusqueda";
 
 const BuscadorScreen = () => {
   const [textoBusqueda, setTextoBusqueda] = React.useState(''); //estado para el texto de la barra de busqueda
+  
   const handleActualizarTextoBusqueda = (nuevoTexto) => { //funcion para cuando cambie el texto dentro del componente hijo
+    setTextoBusqueda(nuevoTexto); // Actualiza el estado con el nuevo texto en el componente padre, osea este 
+
   };
 
 
