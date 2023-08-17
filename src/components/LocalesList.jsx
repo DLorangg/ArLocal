@@ -3,7 +3,7 @@ import {Text, FlatList } from "react-native";
 import locales from "./data/locales";
 import LocalesItem from "./LocalesItem";
 
-const LocalesList = () =>{
+const LocalesList = ({textoBusqueda}) =>{
 // weas->
 const busqueda= (locales, input) =>{ 
     const coincidencia= ""
