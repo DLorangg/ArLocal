@@ -5,6 +5,7 @@ const BarraBusqueda = ({ actualizarTextoBusqueda }) =>{
   const [texto, setTexto] = React.useState('');
 
   const handleActualizarTexto = (nuevoTexto) => { //funcion para cuando se actualice el texto
+    setTexto(nuevoTexto); //cambia el estado del texto
 
   };
   
