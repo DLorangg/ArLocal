@@ -3,9 +3,9 @@ import {Text, FlatList } from "react-native";
 import locales from "./data/locales";
 import LocalesItem from "./LocalesItem";
 
-const LocalesList = ({textoBusqueda}) =>{
+const LocalesList = ({busqueda}) =>{
 // weas->
-const busqueda= (locales, input) =>{ 
+const x= (locales, input) =>{ 
     const coincidencia= ""
     locales.forEach( (local)=> { 
         if (input === local.nombre){
@@ -28,14 +28,14 @@ const busqueda= (locales, input) =>{
 // }
 //<-weas
     return(
-        <FlatList
-        data={locales}
-        ItemSeparatorComponent={()=><Text></Text>}
-        renderItem={({item: local})=>(
-            <LocalesItem {... local}/>
+        // <FlatList
+        // data={locales}
+        // ItemSeparatorComponent={()=><Text></Text>}
+        // renderItem={({item: local})=>(
+        //     <LocalesItem {... local}/>
 
-        )}/>
-
+        // )}/>
+<Text>{busqueda}</Text>
     )
 }
 
