@@ -1,7 +1,7 @@
 import React from "react";
 import {SafeAreaView, StyleSheet, TextInput, View, Text} from 'react-native';
 
-const BarraBusqueda = () =>{
+const BarraBusqueda = ({ actualizarTextoBusqueda }) =>{
   const [texto, setTexto] = React.useState('');
   
     return (
