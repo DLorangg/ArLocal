@@ -54,7 +54,6 @@ export function IniciarSesion() {
 
           <div className="w-full h-100">
 
-            
             <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Ingresa a su Cuenta</h1>
 
             <form className="mt-6" onSubmit={handleSubmit}>
