@@ -3,7 +3,7 @@ import React from "react";
 import Navigation from "./Navigation";
 import AppBar from "./src/components/AppBar";
 
-const App =()=>{
+export default function App() {
 
   return(
     <>
@@ -15,6 +15,3 @@ const App =()=>{
 
   ) 
 };
-
-
-export default App;

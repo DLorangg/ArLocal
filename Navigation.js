@@ -12,6 +12,7 @@ import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
+import LoginScreen from "./screens/LoginScreen";
 
 
 const Tab= createBottomTabNavigator()
@@ -21,7 +22,13 @@ const Tab= createBottomTabNavigator()
 const ConfiguracionStackNavigator= createNativeStackNavigator();
 function MyStack(){
     return(
-        <ConfiguracionStackNavigator.Navigator initialRouteName="Configuraciones">
+        <ConfiguracionStackNavigator.Navigator initialRouteName="LoginScreen">
+
+            <LoginStackNavigator.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{ headerShown: false }}
+            />
             
             <ConfiguracionStackNavigator.Screen
                 name="Configuraciones"
