@@ -4,7 +4,8 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-//screens
+
+//Screens
 import FavoritosScreen from "./screens/FavoritosScreen";
 import ConfiguracionesScreen from "./screens/ConfiguracionesScreen";
 import BuscadorScreen from "./screens/BuscadorScreen";
@@ -12,50 +13,30 @@ import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
+import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import RegistrarseScreen from "./screens/RegistrarseScreen";
 
 
-const Tab= createBottomTabNavigator()
-// const color ='#6EE674'
+const Tab = createBottomTabNavigator()
+const Stack = createNativeStackNavigator();
 
-
-const ConfiguracionStackNavigator= createNativeStackNavigator();
 function MyStack(){
     return(
-        <ConfiguracionStackNavigator.Navigator initialRouteName="LoginScreen">
-
-            <LoginStackNavigator.Screen
-                name="Login"
-                component={LoginScreen}
-                options={{ headerShown: false }}
-            />
-            
-            <ConfiguracionStackNavigator.Screen
-                name="Configuraciones"
-                component={ConfiguracionesScreen}
-                options={{ headerShown: false }}
-
-            />
-            <ConfiguracionStackNavigator.Screen
-                name="Configuracion1"
-                component={Configuracion1Screen}
-            />
-            <ConfiguracionStackNavigator.Screen
-                name="Configuracion2"
-                component={Configuracion2Screen}
-            />
-            <ConfiguracionStackNavigator.Screen
-                name="Configuracion3"
-                component={Configuracion3Screen}
-            />
-
-        </ConfiguracionStackNavigator.Navigator>
+        <NavigationContainer theme={MyTheme}>
+            <Stack.Navigator>
+                <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
+                <Stack.Screen options={{headerShown: false}} name="Registrarse" component={RegistrarseScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
-function MyTabs() {
+
+/*function MyTabs() {
     return(
         <Tab.Navigator
-            initialRouteName="Buscar"
+            initialRouteName="Home"
             screenOptions={{
                 tabBarActiveTintColor: '#519955',
                 tabBarInactiveTintColor: '#6EE674',
@@ -88,6 +69,18 @@ function MyTabs() {
                 }}
             />
             <Tab.Screen 
+                name="Home" 
+                component={HomeScreen}
+                options={{
+                    tabBarLabel: "",
+                    tabBarIcon: ({color, size})=>(
+                        
+                        <MaterialCommunityIcons name="home" size={size} color={color} />
+                    ),
+                    headerShown: false
+                }}
+            />
+            <Tab.Screen 
                 name="Buscar" 
                 component={BuscadorScreen}
                 options={{
@@ -101,8 +94,7 @@ function MyTabs() {
             />
             <Tab.Screen 
                 name="Configuraciones" 
-                
-                component={MyStack}
+                component={ConfiguracionesScreen}
                 options={{
                     tabBarLabel: "",
                     tabBarIcon: ({color, size})=>(
@@ -111,16 +103,14 @@ function MyTabs() {
                     ),
                     headerShown: false
                 }}
-                />
+            />
         </Tab.Navigator>
     )
-}
+}*/
 
 export default function Navigation(){
     return(
-        <NavigationContainer  theme={MyTheme}>
-            <MyTabs />
-        </NavigationContainer>
+            <MyStack />
     )
 }
 const MyTheme = {
@@ -128,4 +118,4 @@ const MyTheme = {
     colors: {
       background: '#5C4999'
     },
-  };
+};
