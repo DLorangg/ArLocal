@@ -9,9 +9,6 @@ export default function App() {
     <>
       <AppBar/>
       <Navigation/>
-
     </>
-
-
   ) 
 };
