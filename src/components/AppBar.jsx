@@ -5,7 +5,6 @@ import { View } from "react-native";
 import * as Font from 'expo-font';
 
 const AppBar = () => {
-
   //#region 
   //fuentes zzZZZzz
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -43,8 +42,6 @@ const AppBar = () => {
         ArLocal
       </Text>
       </View>
-
-
     </View>
   );
 }
