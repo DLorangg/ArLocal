@@ -18,7 +18,7 @@ const LoginScreen = () => {
           style={styles.input}
         />
         <TextInput
-          placeholder="Password"
+          placeholder="Contraseña"
           style={styles.input}
           secureTextEntry
         />
