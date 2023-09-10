@@ -29,7 +29,7 @@ const LoginScreen = () => {
           onPress={() => { }}
           style={styles.button}
         >
-          <Text style={styles.button}>Login</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <Text>
           No tienes una cuenta?{' '}
@@ -58,7 +58,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
-    marginTop: 40,  
+    marginTop: 5,  
   },
-  
+  buttonContainer: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '40%',
+  },
+  button: {
+    backgroundColor: '#6ee674',
+    width: '100%',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 16,
+  }
 })
