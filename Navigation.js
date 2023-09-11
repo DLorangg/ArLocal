@@ -110,7 +110,7 @@ function MyStack(){
 
 export default function Navigation(){
     return(
-            <MyStack />
+        <MyStack />
     )
 }
 const MyTheme = {
