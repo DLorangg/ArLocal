@@ -1,11 +1,32 @@
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
-import RegistrarseScreen from "./RegistrarseScreen";
+import { auth } from '../Firebase';
 
 const LoginScreen = () => {
   const navigation = useNavigation(); // Obtiene la instancia de navegación
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if(user){
+         navigation.replace("Home")
+      }
+    })
+    return unsubscribe
+  }, [])
+
+  const handleLogin = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Inicio sesión con:', user.email);
+      })
+      .catch(error => alert(error.message))
+  }
 
   return (
     <KeyboardAvoidingView
@@ -15,10 +36,14 @@ const LoginScreen = () => {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
+          value={email}
+          onChangeText={text => setEmail(text)}
           style={styles.input}
         />
         <TextInput
           placeholder="Contraseña"
+          value={password}
+          onChangeText={text => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
@@ -26,7 +51,7 @@ const LoginScreen = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => { }}
+          onPress={handleLogin}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
@@ -71,7 +96,6 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
