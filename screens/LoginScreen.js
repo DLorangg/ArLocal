@@ -3,27 +3,19 @@ import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../Firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = () => {
   const navigation = useNavigation(); // Obtiene la instancia de navegación
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if(user){
-         navigation.replace("Home")
-      }
-    })
-    return unsubscribe
-  }, [])
-
   const handleLogin = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
         const user = userCredentials.user;
         console.log('Inicio sesión con:', user.email);
+        navigation.navigate('Home')
       })
       .catch(error => alert(error.message))
   }
@@ -35,12 +27,14 @@ const LoginScreen = () => {
     >
       <View style={styles.inputContainer}>
         <TextInput
+          autoCapitalize='none'
           placeholder="Email"
           value={email}
           onChangeText={text => setEmail(text)}
           style={styles.input}
         />
         <TextInput
+          autoCapitalize='none'
           placeholder="Contraseña"
           value={password}
           onChangeText={text => setPassword(text)}
@@ -66,8 +60,6 @@ const LoginScreen = () => {
     </KeyboardAvoidingView>
   );
 };
-
-export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -103,3 +95,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   }
 })
+
+export default LoginScreen
