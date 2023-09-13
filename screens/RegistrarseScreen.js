@@ -2,7 +2,8 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-n
 import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
-import { auth } from '../Firebase'
+import { auth, createUser } from '../Firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const RegistrarseScreen = () => {
     const navigation = useNavigation();
@@ -10,11 +11,11 @@ const RegistrarseScreen = () => {
     const [password, setPassword] = useState('');
 
     const handleSignUp = () => {
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredentials) => {
           const user = userCredentials.user;
           console.log('Registrado con:', user.email);
+          navigation.navigate('Home')
         })
         .catch(error => alert(error.message))
     }
@@ -30,6 +31,7 @@ const RegistrarseScreen = () => {
             value={email}
             onChangeText={text => setEmail(text)}
             style={styles.input}
+            autoCapitalize='none'
           />
           <TextInput
             placeholder="Password "
@@ -57,8 +59,6 @@ const RegistrarseScreen = () => {
       </KeyboardAvoidingView>
     )
   }
-
-export default RegistrarseScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -94,3 +94,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   }
 })
+
+export default RegistrarseScreen
