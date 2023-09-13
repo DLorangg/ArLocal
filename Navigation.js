@@ -24,10 +24,10 @@ const Stack = createNativeStackNavigator();
 function MyStack(){
     return(
         <NavigationContainer theme={MyTheme}>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
                 <Stack.Screen options={{headerShown: false}} name="Registrarse" component={RegistrarseScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
