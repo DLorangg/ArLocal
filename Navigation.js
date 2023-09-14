@@ -27,13 +27,13 @@ function MyStack(){
             <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
                 <Stack.Screen options={{headerShown: false}} name="Registrarse" component={RegistrarseScreen} />
-                <Stack.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
+                <Stack.Screen options={{headerShown: false}} name="Tabs" component={MyTabs} />
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
 
-/*function MyTabs() {
+function MyTabs() {
     return(
         <Tab.Navigator
             initialRouteName="Home"
@@ -106,7 +106,7 @@ function MyStack(){
             />
         </Tab.Navigator>
     )
-}*/
+}
 
 export default function Navigation(){
     return(
