@@ -10,6 +10,16 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    const noAutenticado = auth.onAuthStateChanged(user => {
+      if (user) {
+        navigation.replace('Tabs')
+      }
+    })
+
+    return noAutenticado
+  }, [])
+
   const handleLogin = () => {
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
