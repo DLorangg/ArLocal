@@ -143,6 +143,9 @@ function MyTabs() {
     )
 }
 //#endregion
+
+//Stack del login
+
 export default function Navigation(){
     return(
         //4) ----------------------NavigationContainer-----------------------------------------     
