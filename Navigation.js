@@ -1,17 +1,21 @@
+//imports
+//#region 
 import React from "react";
-//3) import NavigationContainer
+//------------------------------------------------------------------
+//4) import NavigationContainer
 import { NavigationContainer } from "@react-navigation/native";
 //1) import createNativeStackNavigator
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-
-
+//3) import createBottomTabNavigator
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+//------------------------------------------------------------------
+//otros import 
+//iconos
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
-
 //navbar
 import AppBar from "./src/components/AppBar";
+//------------------------------------------------------------------
 //screens
 import FavoritosScreen from "./screens/FavoritosScreen";
 import ConfiguracionesScreen from "./screens/ConfiguracionesScreen";
@@ -20,8 +24,10 @@ import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
+//------------------------------------------------------------------
+//#endregion
 
-//pantalla de configuraciones
+//pantalla de configuraciones con su stack (pila) de configuraciones [hasta ahora hay tres que no hacen nada lol]
 //#region 
 
 //1) ----------------------createNativeStackNavigator-----------------------------------------
@@ -67,6 +73,10 @@ function MyStack(){
 }
 //#endregion
 
+//Navegador de pestañas inferior
+//#region 
+//3) ----------------------createBottomTabNavigator-----------------------------------------
+//3) "createBottomTabNavigator" una función que devuelve un objeto que contiene 2 propiedades: Screen y Navigator. y crea Una barra de pestañas simple en la parte inferior de la pantalla que te permite cambiar entre diferentes rutas. 
 const Tab= createBottomTabNavigator()
 function MyTabs() {
     return(
@@ -115,6 +125,7 @@ function MyTabs() {
                     headerShown: false
                 }}
             />
+            {/*2) componente donde se encuentra la "ConfiguracionStackNavigator" que cree con createNativeStackNavigator (1) */}
             <Tab.Screen 
                 name="Configuraciones" 
                 
@@ -131,17 +142,17 @@ function MyTabs() {
         </Tab.Navigator>
     )
 }
-
+//#endregion
 export default function Navigation(){
     return(
-        //3) ----------------------NavigationContainer-----------------------------------------     
+        //4) ----------------------NavigationContainer-----------------------------------------     
 
-        /*3)"NavigationContainer" es un contenedor especial de react navigation el cual debe envolver toda la applicacion.
+        /*4)"NavigationContainer" es un contenedor especial de react navigation el cual debe envolver toda la applicacion.
         "NavigationContainer es un componente que gestiona nuestro árbol de navegación y contiene el estado de navegación . Este componente debe envolver toda la estructura de los navegadores."*/
         <NavigationContainer  theme={MyTheme}>
             {/* navbar */}
             <AppBar/>
-            {/*2) componente donde se encuentra la "ConfiguracionStackNavigator" que cree con createNativeStackNavigator (1) */}
+            {/*3) componente donde se encuentra la "Tab" que cree con createBottomTabNavigator*/}
             <MyTabs />
         </NavigationContainer>
     )
