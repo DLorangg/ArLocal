@@ -34,16 +34,15 @@ const AppBar = () => {
         source={require('../components/../../assets/logos/7.png')}
       />
       <View style={styles.containerTexto1}>      
-      <Text style={styles.texto1}>
-        ArLocal
-      </Text>
+        <Text style={styles.texto1}>
+          ArLocal
+        </Text>
       </View>
       <View style={styles.containerTexto2}>      
-      <Text style={styles.texto2}>
-        ArLocal
-      </Text>
+        <Text style={styles.texto2}>
+          ArLocal
+        </Text>
       </View>
-
 
     </View>
   );

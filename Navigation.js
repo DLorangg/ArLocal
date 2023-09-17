@@ -4,6 +4,9 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+//navbar
+import AppBar from "./src/components/AppBar";
 //screens
 import FavoritosScreen from "./screens/FavoritosScreen";
 import ConfiguracionesScreen from "./screens/ConfiguracionesScreen";
@@ -111,7 +114,9 @@ function MyTabs() {
 
 export default function Navigation(){
     return(
+        //contenedor especial de react navigation el cual debe envolver toda la applicacion
         <NavigationContainer  theme={MyTheme}>
+            <AppBar/>
             <MyTabs />
         </NavigationContainer>
     )
