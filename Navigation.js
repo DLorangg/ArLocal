@@ -127,6 +127,7 @@ export default function Navigation(){
         <NavigationContainer  theme={MyTheme}>
             {/* navbar */}
             <AppBar/>
+            {/*2) componente donde se encuentra la "ConfiguracionStackNavigator" que cree con createNativeStackNavigator (1) */}
             <MyTabs />
         </NavigationContainer>
     )
