@@ -1,7 +1,7 @@
 import React from "react";
-//3) NavigationContainer
+//3) import NavigationContainer
 import { NavigationContainer } from "@react-navigation/native";
-//1) createNativeStackNavigator
+//1) import createNativeStackNavigator
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 
@@ -21,21 +21,31 @@ import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
 
+//pantalla de configuraciones
+//#region 
 
-const Tab= createBottomTabNavigator()
-
-
+//1) ----------------------createNativeStackNavigator-----------------------------------------
 //1) "createNativeStackNavigatores" una función que devuelve un objeto que contiene 2 propiedades: Screen y Navigator.
 const ConfiguracionStackNavigator= createNativeStackNavigator();
 
+
+//2) ----------------------Screen y Navigator-----------------------------------------
 function MyStack(){
     return(
         //2) Debe Navigator contener Screen elementos como sus hijos para definir la configuración de las rutas.
+        /* 2) dentro de "Navigator" se definen todas las rutas que contendra este componente.
+        Estas rutas se especifican utilizando "Screen"*/
         <ConfiguracionStackNavigator.Navigator initialRouteName="Configuraciones">
-            
+            {/*2) esta primer screen esta como ruta inicial (initialRouteName="Configuraciones") por lo que sera la que se vera al renderizar este componente.
+            en este caso, esta primer screen renderiza en su componente (ConfiguracionesScreen) botones que te permiten navegar por las demas rutas definidas*/}
             <ConfiguracionStackNavigator.Screen
+                //2) nombre de la ruta que usaremos para navegar
                 name="Configuraciones"
+                //2) component corresponde al componente que representará ese Screen
                 component={ConfiguracionesScreen}
+                //2)entonces, la Configuraciones ruta corresponde al ConfiguracionesScreen componente
+                //-------------------------------------------------------
+                //2) options sirve para configurar diversas opciones el navegador
                 options={{ headerShown: false }}
 
             />
@@ -55,6 +65,9 @@ function MyStack(){
         </ConfiguracionStackNavigator.Navigator>
     )
 }
+//#endregion
+
+const Tab= createBottomTabNavigator()
 function MyTabs() {
     return(
         <Tab.Navigator
@@ -121,9 +134,10 @@ function MyTabs() {
 
 export default function Navigation(){
     return(
-        //3)"NavigationContainer" es un contenedor especial de react navigation el cual debe envolver toda la applicacion 
-        //3) "NavigationContainer es un componente que gestiona nuestro árbol de navegación y 
-        //3) contiene el estado de navegación . Este componente debe envolver toda la estructura de los navegadores."
+        //3) ----------------------NavigationContainer-----------------------------------------     
+
+        /*3)"NavigationContainer" es un contenedor especial de react navigation el cual debe envolver toda la applicacion.
+        "NavigationContainer es un componente que gestiona nuestro árbol de navegación y contiene el estado de navegación . Este componente debe envolver toda la estructura de los navegadores."*/
         <NavigationContainer  theme={MyTheme}>
             {/* navbar */}
             <AppBar/>
