@@ -1,9 +1,14 @@
 import React from "react";
+//3) NavigationContainer
+import { NavigationContainer } from "@react-navigation/native";
+//1) createNativeStackNavigator
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //navbar
 import AppBar from "./src/components/AppBar";
@@ -18,12 +23,14 @@ import Configuracion3Screen from "./screens/Configuracion3Screen";
 
 
 const Tab= createBottomTabNavigator()
-// const color ='#6EE674'
 
 
+//1) "createNativeStackNavigatores" una función que devuelve un objeto que contiene 2 propiedades: Screen y Navigator.
 const ConfiguracionStackNavigator= createNativeStackNavigator();
+
 function MyStack(){
     return(
+        //2) Debe Navigator contener Screen elementos como sus hijos para definir la configuración de las rutas.
         <ConfiguracionStackNavigator.Navigator initialRouteName="Configuraciones">
             
             <ConfiguracionStackNavigator.Screen
@@ -114,8 +121,11 @@ function MyTabs() {
 
 export default function Navigation(){
     return(
-        //contenedor especial de react navigation el cual debe envolver toda la applicacion
+        //3)"NavigationContainer" es un contenedor especial de react navigation el cual debe envolver toda la applicacion 
+        //3) "NavigationContainer es un componente que gestiona nuestro árbol de navegación y 
+        //3) contiene el estado de navegación . Este componente debe envolver toda la estructura de los navegadores."
         <NavigationContainer  theme={MyTheme}>
+            {/* navbar */}
             <AppBar/>
             <MyTabs />
         </NavigationContainer>
