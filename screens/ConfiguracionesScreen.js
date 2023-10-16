@@ -8,6 +8,7 @@ const ConfiguracionesScreen =()=>{
     <View style={styles.container}>
 
       <TouchableOpacity style={styles.stacks}
+        //al usar "navigation.navigate("")" se busca una ruta existente en la stack con el nombre que se le pide y se le envia a la correspondiente pantalla
         onPress={()=>navigation.navigate("Configuracion1")}
       >
         <Text style={styles.title}>Configuracion1</Text>

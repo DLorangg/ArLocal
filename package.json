@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
@@ -16,6 +17,12 @@
     "@types/react": "~18.0.27",
     "expo": "~48.0.15",
     "expo-barcode-scanner": "~12.3.2",
+=======
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "expo": "~48.0.15",
+>>>>>>> 9c377d7dfa516bc712e3ea60ecf84519e1498a33
     "expo-font": "~11.1.1",
     "expo-status-bar": "~1.4.4",
     "firebase": "^10.3.1",
@@ -23,8 +30,12 @@
     "react-native": "0.71.13",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-safe-area-context": "4.5.0",
+<<<<<<< HEAD
     "react-native-screens": "~3.20.0",
     "typescript": "^4.9.5"
+=======
+    "react-native-screens": "~3.20.0"
+>>>>>>> 9c377d7dfa516bc712e3ea60ecf84519e1498a33
   },
   "devDependencies": {
     "@babel/core": "^7.22.17"

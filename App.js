@@ -1,13 +1,16 @@
 import React from "react";
 
 import Navigation from "./Navigation";
-import AppBar from "./src/components/AppBar";
 
+<<<<<<< HEAD
 export default function App() {
 
+=======
+const App =()=>{
+>>>>>>> 9c377d7dfa516bc712e3ea60ecf84519e1498a33
   return(
     <>
-      <AppBar/>
+      {/* Navigation retorna el NavigationContainer (contenedor especial de react navigation el cual debe envolver toda la applicacion)  */}
       <Navigation/>
     </>
   ) 
