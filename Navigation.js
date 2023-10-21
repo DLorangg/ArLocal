@@ -24,9 +24,67 @@ import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
+
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegistrarseScreen from "./screens/RegistrarseScreen";
 //------------------------------------------------------------------
 //#endregion
 
+//pantalla de login
+//#region 
+const Stack = createNativeStackNavigator();
+
+function Login(){
+    return(
+            <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
+                <Stack.Screen options={{headerShown: false}} name="Registrarse" component={RegistrarseScreen} />
+                <Stack.Screen options={{headerShown: false}} name="Tabs" component={MyTabs} />
+            </Stack.Navigator>
+    )
+}
+// const TabLogin= createBottomTabNavigator()
+// function Login() {
+//     return(
+//         <TabLogin.Navigator
+//             initialRouteName="Login"
+//             screenOptions={{
+//                 tabBarActiveTintColor: '#519955',
+//                 tabBarInactiveTintColor: '#6EE674',
+//                 tabBarStyle: { backgroundColor:'#5C4999', height: 62}
+
+//             }}
+//         >
+//             <TabLogin.Screen 
+//                 name="Login" 
+//                 component={LoginScreen}
+//                 options={{
+//                     tabBarLabel: "",
+//                     tabBarIcon: ({color, size})=>(
+                        
+//                         <MaterialCommunityIcons name="star" size={size} color={color} />
+//                     ),
+//                     headerShown: false
+//                 }}
+//             />
+//             <TabLogin.Screen 
+//                 name="Registrarse" 
+//                 component={RegistrarseScreen}
+//                 options={{
+//                     tabBarLabel: "",
+//                     tabBarIcon: ({color, size})=>(
+                        
+//                         <MaterialCommunityIcons name="camera" size={size} color={color} />
+//                     ),
+//                     headerShown: false
+//                 }}
+//             />
+//         </TabLogin.Navigator>
+//     )
+// }
+
+//#endregion
 //pantalla de configuraciones con su stack (pila) de configuraciones [hasta ahora hay tres que no hacen nada lol]
 //#region 
 
@@ -156,7 +214,7 @@ export default function Navigation(){
             {/* navbar */}
             <AppBar/>
             {/*3) componente donde se encuentra la "Tab" que cree con createBottomTabNavigator*/}
-            <MyTabs />
+            <Login />
         </NavigationContainer>
     )
 }
