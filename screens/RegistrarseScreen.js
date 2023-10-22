@@ -1,6 +1,6 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+
 import { useNavigation } from '@react-navigation/native'
 import { auth, createUser } from '../Firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
