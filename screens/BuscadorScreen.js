@@ -12,9 +12,6 @@ const BuscadorScreen = () => {
 
   };
 
-
-
-
   const navigation = useNavigation();
 
   useEffect(() => {
