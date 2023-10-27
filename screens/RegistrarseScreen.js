@@ -11,14 +11,28 @@ const RegistrarseScreen = () => {
     const [password, setPassword] = useState('');
 
     const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
           const user = userCredentials.user;
           console.log('Registrado con:', user.email);
-          navigation.navigate('Tabs')
+          navigation.navigate('Tabs');
         })
-        .catch(error => alert(error.message))
-    }
+        .catch((error) => {
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              alert('La dirección de correo electrónico ya está en uso. Inicie sesión en su cuenta o use una dirección de correo electrónico diferente.');
+              break;
+            case 'auth/invalid-email':
+              alert('La dirección de correo electrónico es inválida. Debe contener "@".');
+              break;
+            case 'auth/weak-password':
+              alert('La contraseña es demasiado débil. Intente con una contraseña más segura.');
+              break;
+            default:
+              alert('Error desconocido: ' + error.message);
+          }
+        });
+    };    
     
     return (
       <KeyboardAvoidingView
