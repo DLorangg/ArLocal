@@ -3,8 +3,7 @@ import * as Font from 'expo-font';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
 const LocalesItem = (props) => {
-  //#region 
-  //fuentes zzZZZzz
+  // Fuentes
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,17 +21,16 @@ const LocalesItem = (props) => {
   if (!fontsLoaded) {
     return null;
   }
-  //#endregion
 
   return (
-    <View key={props.id} style={styles.contenedor}>
-      <Image style={styles.imagen} source={{ uri: props.img }} />
+    <View key={props.DocumentID} style={styles.contenedor}>
+      <Image style={styles.imagen} source={{ uri: props.Img }} />
       <View style={styles.cuerpo}>
-        <Text style={styles.titulo}>{props.nombre}</Text>
+        <Text style={styles.titulo}>{props.Nombre}</Text>
         <View style={styles.categoria}>
-          <Text style={styles.textoCategoria}>{props.categoria}</Text>
+          <Text style={styles.textoCategoria}>{props.Categoria}</Text>
         </View>
-        <Text style={styles.direccion}>{props.direccion}</Text>
+        <Text style={styles.direccion}>{props.Dirección}</Text>
       </View>
     </View>
   );
@@ -66,17 +64,14 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderRadius: 4
   },
-  textoCategoria:{
+  textoCategoria: {
     fontFamily: 'kraash-black',
     fontSize: 6,
     color: '#9C85E6'
-
   },
-  direccion:{
+  direccion: {
     fontSize: 12,
     color: '#FFF',
-
-
   },
   imagen: {
     width: 150,
