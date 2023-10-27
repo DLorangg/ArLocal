@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, TextInput, View, Text } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const BarraBusqueda = ({ actualizarTextoBusqueda }) => {
+const BarraBusqueda = ({ actualizarTextoBusqueda, locales }) => {
   const [texto, setTexto] = React.useState('');
 
   const handleActualizarTexto = (nuevoTexto) => {

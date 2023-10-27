@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, FlatList } from 'react-native';
+import { Text, FlatList, query } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../Firebase'; 
 import LocalesItem from './LocalesItem';
@@ -9,7 +9,7 @@ const LocalesList = ({ busqueda }) => {
 
   useEffect(() => {
     const fetchLocalesFromFirestore = async () => {
-      const localCollection = collection(firestore, 'local'); // Usar 'local' como nombre de la colección
+      const localCollection = collection(firestore, 'local');
       const querySnapshot = await getDocs(localCollection);
 
       const localesData = [];
@@ -23,9 +23,19 @@ const LocalesList = ({ busqueda }) => {
     fetchLocalesFromFirestore();
   }, []);
 
+  //Logica para filtrar locales
+  const localesFiltrados = locales.filter((local) => {
+    if (busqueda === '') {
+      return true;
+    } else {
+      return local.Categoria.toLowerCase().includes(busqueda.toLowerCase());
+    }
+  });
+
+  //Mostrar Locales
   return (
     <FlatList
-      data={locales}
+      data={localesFiltrados}
       ItemSeparatorComponent={() => <Text></Text>}
       renderItem={({ item: local }) => <LocalesItem {...local} />}
     />
