@@ -23,8 +23,6 @@ const LocalesList = ({ busqueda }) => {
     fetchLocalesFromFirestore();
   }, []);
 
-  // Puedes agregar la lógica para filtrar locales basados en la búsqueda aquí
-
   return (
     <FlatList
       data={locales}
