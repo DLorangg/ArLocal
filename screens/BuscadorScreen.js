@@ -1,30 +1,30 @@
-import React, { useEffect } from "react";
-import { View, Text} from 'react-native';
-import LocalesList from '../src/components/LocalesList';
+import React, { useEffect, useState } from "react";
+import { View, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import LocalesList from '../src/components/LocalesList';
 import BarraBusqueda from "../src/components/BarraBusqueda";
 
 const BuscadorScreen = () => {
-  const [textoBusqueda, setTextoBusqueda] = React.useState(''); //estado para el texto de la barra de busqueda
-  
-  const handleActualizarTextoBusqueda = (nuevoTexto) => { //funcion para cuando cambie el texto dentro del componente hijo
-    setTextoBusqueda(nuevoTexto); // Actualiza el estado con el nuevo texto en el componente padre, osea este 
+  const [textoBusqueda, setTextoBusqueda] = useState('');
+  const [tipoSeleccionado, setTipoSeleccionado] = useState('nombre');
 
+  const handleActualizarTextoBusqueda = (nuevoTexto) => {
+    setTextoBusqueda(nuevoTexto);
   };
 
   const navigation = useNavigation();
 
   useEffect(() => {
     navigation.setOptions({
-
+      // Configura las opciones de navegación si es necesario
     });
   }, [navigation]);
 
   return (
     <View>
-      <BarraBusqueda actualizarTextoBusqueda={handleActualizarTextoBusqueda}/>
-
-      <LocalesList busqueda={textoBusqueda}/>
+      <BarraBusqueda actualizarTextoBusqueda={handleActualizarTextoBusqueda} />
+      {/* Agrega elementos para permitir al usuario seleccionar el tipo de búsqueda */}
+      <LocalesList busqueda={textoBusqueda} tipoBusqueda={tipoSeleccionado} />
     </View>
   );
 };
