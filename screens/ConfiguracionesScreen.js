@@ -9,13 +9,13 @@ const ConfiguracionesScreen =()=>{
 
       <TouchableOpacity style={styles.stacks}
         //al usar "navigation.navigate("")" se busca una ruta existente en la stack con el nombre que se le pide y se le envia a la correspondiente pantalla
-        onPress={()=>navigation.navigate("Configuracion1")}
+        onPress={()=>navigation.navigate("Perfil")}
       >
         <Text style={styles.title}>Perfil</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.stacks}
-      onPress={()=>navigation.navigate("Configuracion2")}>
-        <Text style={styles.title}>Configuracion2</Text>
+      onPress={()=>navigation.navigate("Crear Local")}>
+        <Text style={styles.title}>Crear Local</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.stacks}
       onPress={()=>navigation.navigate("Configuracion3")}>

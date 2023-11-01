@@ -114,11 +114,11 @@ function MyStack(){
 
             />
             <ConfiguracionStackNavigator.Screen
-                name="Configuracion1"
+                name="Perfil"
                 component={Configuracion1Screen}
             />
             <ConfiguracionStackNavigator.Screen
-                name="Configuracion2"
+                name="Crear Local"
                 component={Configuracion2Screen}
             />
             <ConfiguracionStackNavigator.Screen

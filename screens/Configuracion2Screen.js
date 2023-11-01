@@ -5,7 +5,7 @@ const Configuracion2Screen =()=>{
   return(
 
     <View style={styles.container}>
-      <Text style={styles.title}>Configuracion2Screen</Text>
+      
 
     </View>
   ) 
