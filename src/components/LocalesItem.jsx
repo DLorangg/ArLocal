@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Font from 'expo-font';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 
 const LocalesItem = (props) => {
   // Fuentes
@@ -23,6 +23,9 @@ const LocalesItem = (props) => {
   }
 
   return (
+    <TouchableOpacity
+     onPress={()=>Alert.alert('Hola')}
+    >
     <View key={props.DocumentID} style={styles.contenedor}>
       <Image style={styles.imagen} source={{ uri: props.Img }} />
       <View style={styles.cuerpo}>
@@ -33,6 +36,7 @@ const LocalesItem = (props) => {
         <Text style={styles.direccion}>{props.Dirección}</Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 }
 
@@ -56,11 +60,12 @@ const styles = StyleSheet.create({
     fontFamily: 'kraash-black',
     fontSize: 9,
     marginBottom: 5,
+    marginTop: 5,
     color: '#FFF',
   },
   categoria: {
     backgroundColor: '#5C4999',
-    padding: 4,
+    padding: 7,
     alignSelf: 'flex-start',
     borderRadius: 4
   },
