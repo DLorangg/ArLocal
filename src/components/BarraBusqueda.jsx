@@ -2,11 +2,11 @@ import React from "react";
 import { SafeAreaView, StyleSheet, TextInput, View, Text } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const BarraBusqueda = ({ actualizarTextoBusqueda, locales }) => {
-  const [texto, setTexto] = React.useState('');
+const BarraBusqueda = ({ actualizarTextoBusqueda }) => {
+  const [nombre, setNombre] = React.useState('');
 
   const handleActualizarTexto = (nuevoTexto) => {
-    setTexto(nuevoTexto);
+    setNombre(nuevoTexto);
     actualizarTextoBusqueda(nuevoTexto);
   };
 
@@ -16,8 +16,9 @@ const BarraBusqueda = ({ actualizarTextoBusqueda, locales }) => {
         <MaterialCommunityIcons name="magnify" size={24} color="#9C85E6" style={styles.icon} />
         <TextInput
           style={styles.input}
+          placeholder="Buscar por nombre"
           onChangeText={handleActualizarTexto}
-          value={texto}
+          value={nombre}
         />
       </View>
     </SafeAreaView>
@@ -29,18 +30,14 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
-    borderColor: '#9C85E6', // Establece el color del borde
+    borderColor: '#9C85E6',
     flex: 1,
-  },
-  text: {
-    margin: 12,
-    fontSize: 16,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    paddingHorizontal: 5, // Agrega espacio en los lados
+    paddingHorizontal: 5,
   },
   icon: {
     marginLeft: 10,

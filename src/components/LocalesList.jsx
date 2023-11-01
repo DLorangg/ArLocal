@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Text, FlatList, query } from 'react-native';
+import { Text, FlatList } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
-import { firestore } from '../../Firebase'; 
+import { firestore } from '../../Firebase';
 import LocalesItem from './LocalesItem';
 
 const LocalesList = ({ busqueda }) => {
@@ -23,16 +23,19 @@ const LocalesList = ({ busqueda }) => {
     fetchLocalesFromFirestore();
   }, []);
 
-  //Logica para filtrar locales
+  // Lógica para filtrar por nombre o categoría
   const localesFiltrados = locales.filter((local) => {
     if (busqueda === '') {
       return true;
     } else {
-      return local.Categoria.toLowerCase().includes(busqueda.toLowerCase());
+      // Filtrar si el nombre o la categoría incluyen la búsqueda
+      return (
+        local.Nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        local.Categoria.toLowerCase().includes(busqueda.toLowerCase())
+      );
     }
   });
 
-  //Mostrar Locales
   return (
     <FlatList
       data={localesFiltrados}
@@ -40,6 +43,6 @@ const LocalesList = ({ busqueda }) => {
       renderItem={({ item: local }) => <LocalesItem {...local} />}
     />
   );
-}
+};
 
 export default LocalesList;

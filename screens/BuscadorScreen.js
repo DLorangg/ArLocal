@@ -24,7 +24,7 @@ const BuscadorScreen = () => {
     <View>
       <BarraBusqueda actualizarTextoBusqueda={handleActualizarTextoBusqueda}/>
 
-      <LocalesList busqueda={textoBusqueda}/>
+      <LocalesList busqueda={textoBusqueda} tipoBusqueda={tipoSeleccionado} />
     </View>
   );
 };
