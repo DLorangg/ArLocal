@@ -14,8 +14,8 @@ const ConfiguracionesScreen =()=>{
         <Text style={styles.title}>Perfil</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.stacks}
-      onPress={()=>navigation.navigate("Crear Local")}>
-        <Text style={styles.title}>Crear Local</Text>
+      onPress={()=>navigation.navigate("Local")}>
+        <Text style={styles.title}>Local</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.stacks}
       onPress={()=>navigation.navigate("Configuracion3")}>

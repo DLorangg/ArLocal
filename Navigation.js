@@ -118,7 +118,7 @@ function MyStack(){
                 component={Configuracion1Screen}
             />
             <ConfiguracionStackNavigator.Screen
-                name="Crear Local"
+                name="Local"
                 component={Configuracion2Screen}
             />
             <ConfiguracionStackNavigator.Screen
