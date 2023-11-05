@@ -12,5 +12,12 @@ web-build/
 # macOS
 .DS_Store
 
+# env
+
+.env
+
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+# Id de Cliente web: 1093718287709-e464uv095boa4pmng2s0hfchs34ervag.apps.googleusercontent.com
+
