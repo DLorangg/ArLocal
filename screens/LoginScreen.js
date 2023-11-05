@@ -68,9 +68,9 @@ const LoginScreen = () => {
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "1093718287709-e464uv095boa4pmng2s0hfchs34ervag.apps.googleusercontent.com",
-    iosClientId: "1093718287709-4mr11skao6vlf4lkmr858q7mt788a4qm.apps.googleusercontent.com",
-    androidClientId: "1093718287709-vumi9rr2bfbdbsidbshm71dgkgfto5ai.apps.googleusercontent.com"
+    clientId: " ",
+    iosClientId: " ",
+    androidClientId: " "
   });
 
   React.useEffect(() => {
