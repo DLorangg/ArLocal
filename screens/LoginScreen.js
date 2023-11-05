@@ -2,7 +2,10 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View, TouchableOpaci
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../Firebase';
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail, getAuth, signInWithPopup, GoogleAuthProvider  } from 'firebase/auth';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google'
+
 
 const LoginScreen = () => {
   const navigation = useNavigation(); // Obtiene la instancia de navegación
@@ -60,8 +63,46 @@ const LoginScreen = () => {
     }
   };
 
-  return (
+  // Login con Google
 
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: "1093718287709-e464uv095boa4pmng2s0hfchs34ervag.apps.googleusercontent.com",
+    iosClientId: "1093718287709-4mr11skao6vlf4lkmr858q7mt788a4qm.apps.googleusercontent.com",
+    androidClientId: "1093718287709-vumi9rr2bfbdbsidbshm71dgkgfto5ai.apps.googleusercontent.com"
+  });
+
+  React.useEffect(() => {
+    if(response?.type === "success"){
+      setAccessToken(response.authentication.accessToken);
+      accessToken && fetchUserInfo();
+    }
+  }, [response, accessToken])
+
+  async function fetchUserInfo(){
+    let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: {
+        Authorization: 'Bearer ${accessToken}'
+      }
+    });
+    const useInfo = await response.json();
+    setUser(useInfo);
+  }
+
+  const ShowUserInfo = () => {
+    if(user) {
+      return(
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{fontSize: 35, fontWeight: 'bold', marginBottom: 20}}>Bienvenido</Text>
+          <Image source={{uri: user.picture}} style={{width: 100, height: 100, borderRadius: 50}}/>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>{user.name}</Text>
+        </View>
+      )
+    }
+  }
+
+  return (
     <KeyboardAvoidingView
       styles={styles.container}
       behavior="padding"
@@ -91,6 +132,20 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        {user && <ShowUserInfo/>}
+        {user === null &&
+          <>
+        <TouchableOpacity
+          disable={!request}
+          onPress={() => {
+            promptAsync();
+          }}
+          style={styles.button}
+          >
+            <Text style={styles.buttonText}>Login with Google</Text>
+        </TouchableOpacity>
+        </>
+        } 
         <TouchableOpacity
           onPress={handleChangePassword}
           style={styles.changePasswordButton}
@@ -103,6 +158,7 @@ const LoginScreen = () => {
             <Text style={styles.registerLink}>Regístrate!</Text>
           </TouchableOpacity>
         </Text>
+        
       </View>
     </KeyboardAvoidingView>
   );
