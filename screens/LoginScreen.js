@@ -68,9 +68,9 @@ const LoginScreen = () => {
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: " ",
-    iosClientId: " ",
-    androidClientId: " "
+    clientId: "1093718287709-e464uv095boa4pmng2s0hfchs34ervag.apps.googleusercontent.com",
+    iosClientId: "1093718287709-4mr11skao6vlf4lkmr858q7mt788a4qm.apps.googleusercontent.com",
+    androidClientId: "1093718287709-vumi9rr2bfbdbsidbshm71dgkgfto5ai.apps.googleusercontent.com"
   });
 
   React.useEffect(() => {
@@ -103,53 +103,39 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      styles={styles.container}
-      behavior="padding"
-    >
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <TextInput
-          autoCapitalize='none'
+          autoCapitalize="none"
           placeholder="Email"
           value={email}
-          onChangeText={text => setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
           style={styles.input}
         />
         <TextInput
-          autoCapitalize='none'
+          autoCapitalize="none"
           placeholder="Contraseña"
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={styles.button}
-        >
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        {user && <ShowUserInfo/>}
-        {user === null &&
-          <>
         <TouchableOpacity
-          disable={!request}
+          disabled={!request}
           onPress={() => {
             promptAsync();
           }}
           style={styles.button}
-          >
-            <Text style={styles.buttonText}>Login with Google</Text>
-        </TouchableOpacity>
-        </>
-        } 
-        <TouchableOpacity
-          onPress={handleChangePassword}
-          style={styles.changePasswordButton}
         >
+          <Text style={styles.buttonText}>Login with Google</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleChangePassword} style={styles.changePasswordButton}>
           <Text style={styles.changePasswordButtonText}>Cambiar contraseña</Text>
         </TouchableOpacity>
         <Text>
@@ -158,7 +144,6 @@ const LoginScreen = () => {
             <Text style={styles.registerLink}>Regístrate!</Text>
           </TouchableOpacity>
         </Text>
-        
       </View>
     </KeyboardAvoidingView>
   );
@@ -169,7 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#5c4999',
   },
   inputContainer: {
     width: '80%',
@@ -206,5 +191,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
 
 export default LoginScreen
