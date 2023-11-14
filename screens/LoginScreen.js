@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { FontAwesome as Icon } from "@expo/vector-icons"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase';
+import { signInAnonymously } from 'firebase/auth';
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
@@ -11,7 +12,7 @@ const LoginScreen = () => {
   const navigation = useNavigation(); // Obtiene la instancia de navegación
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const handleCrearCuenta = () =>{
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential)=>{
@@ -61,6 +62,22 @@ const LoginScreen = () => {
             }
         })           
   }
+
+  const handleInvitado = () => {
+    signInAnonymously(auth)
+      .then((userCredential) => {
+        const usuario = userCredential.user;
+        console.log('Usuario invitado creado:', usuario);
+        navigation.navigate('Tabs');
+      })
+      .catch((error) => {
+        // Manejo de errores si la autenticación anónima falla
+        console.error('Error al crear usuario invitado:', error);
+        // Aquí puedes mostrar una alerta u otro mensaje al usuario sobre el fallo en la autenticación
+      });
+  };
+
+  
 
     // Login con Google sin Firebase 
 
@@ -144,7 +161,7 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={()=>{navigation.navigate('Tabs')}}
+          onPress={handleInvitado}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Invitado</Text>
