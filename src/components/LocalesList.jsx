@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../Firebase';
 import LocalesItem from './LocalesItem';
 
-const LocalesList = ({ busqueda }) => {
+const LocalesList = ({ busqueda, tipoSeleccionado, abrirDetalleLocal }) => {
   const [locales, setLocales] = useState([]);
 
   useEffect(() => {
@@ -40,9 +40,10 @@ const LocalesList = ({ busqueda }) => {
     <FlatList
       data={localesFiltrados}
       ItemSeparatorComponent={() => <Text></Text>}
-      renderItem={({ item: local }) => <LocalesItem {...local} />}
+      renderItem={({ item: local }) => <LocalesItem abrirDetalleLocal={abrirDetalleLocal} {...local} />}
     />
   );
 };
 
 export default LocalesList;
+
