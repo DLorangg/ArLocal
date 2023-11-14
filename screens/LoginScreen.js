@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { FontAwesome as Icon } from "@expo/vector-icons"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase';
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 const LoginScreen = () => {
@@ -60,6 +61,47 @@ const LoginScreen = () => {
             }
         })           
   }
+
+    // Login con Google sin Firebase 
+
+    // const [accessToken, setAccessToken] = React.useState(null);
+    // const [user, setUser] = React.useState(null);
+    // const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    //   clientId: " ",
+    //   iosClientId: " ",
+    //   androidClientId: " "
+    // });
+  
+    // React.useEffect(() => {
+    //   if(response?.type === "success"){
+    //     setAccessToken(response.authentication.accessToken);
+    //     accessToken && fetchUserInfo();
+    //   }
+    // }, [response, accessToken])
+
+    // Este es el otro login Con Google Siguiendo la Documentacion de Firebase que tiene Expo
+
+    // GoogleSignin.configure ({
+    //   webClienId: '',
+    // });
+
+    // const onGoogleButtonPress = async () => {
+    //   // Check if your device supports Google play
+    //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    //   // Get the users Id token
+    //   const { id_token } = await GoogleSignin.signIn();
+
+    //   // Create a Google credential with the token
+    //   const user_sing_in = auth().signWithCredential(googleCredential);
+    //   user_sing_in
+    //     .then((user) => {
+    //       console.log(user);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // }
+    
 
 
   return (
