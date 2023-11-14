@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, FlatList } from 'react-native';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { firestore } from '../../Firebase';
 import LocalesItem from './LocalesItem';
 
@@ -8,19 +8,19 @@ const LocalesList = ({ busqueda }) => {
   const [locales, setLocales] = useState([]);
 
   useEffect(() => {
-    const fetchLocalesFromFirestore = async () => {
-      const localCollection = collection(firestore, 'local');
-      const querySnapshot = await getDocs(localCollection);
+    const localCollection = collection(firestore, 'local');
+    const orderedQuery = query(localCollection, orderBy('Nombre'));
 
+    const unsubscribe = onSnapshot(orderedQuery, (querySnapshot) => {
       const localesData = [];
       querySnapshot.forEach((doc) => {
         localesData.push(doc.data());
       });
-
       setLocales(localesData);
-    };
+    });
 
-    fetchLocalesFromFirestore();
+    // Limpiar la suscripción cuando el componente se desmonta
+    return () => unsubscribe();
   }, []);
 
   // Lógica para filtrar por nombre o categoría
