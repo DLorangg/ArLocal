@@ -16,7 +16,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "budeleIdentifier": "com.ArLocal"
+      "bundleIdentifier": "com.ArLocal"
     },
     "android": {
       "package": "com.ArLocal",
@@ -27,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "scheme": "ArLocal"
   }
 }
