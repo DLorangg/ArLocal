@@ -24,7 +24,7 @@ const LocalesItem = (props) => {
 
   return (
     <TouchableOpacity
-     onPress={()=>Alert.alert('Hola')}
+     onPress={props.abrirDetalleLocal}
     >
     <View key={props.DocumentID} style={styles.contenedor}>
       <Image style={styles.imagen} source={{ uri: props.Img }} />
@@ -84,3 +84,4 @@ const styles = StyleSheet.create({
     borderRadius: 4
   }
 });
+
