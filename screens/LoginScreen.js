@@ -95,7 +95,7 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={handleCrearCuenta}
+          onPress={() => navigation.navigate('Registrarse')}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Crear Cuenta</Text>
