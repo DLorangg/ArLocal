@@ -1,10 +1,9 @@
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { FontAwesome as Icon } from "@expo/vector-icons"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase';
-import { signInWithEmailAndPassword, sendPasswordResetEmail, getAuth, signInWithPopup, GoogleAuthProvider  } from 'firebase/auth';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google'
 
 
 const LoginScreen = () => {
@@ -12,142 +11,139 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    const noAutenticado = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.replace('Tabs')
-      }
-    })
-
-    return noAutenticado
-  }, [])
-
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log('Inicio sesión con:', user.email);
+  const handleCrearCuenta = () =>{
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential)=>{
+        const usuario = userCredential.user
+        console.log('cuenta creada! Bj', usuario)
         navigation.navigate('Tabs');
-      })
-      .catch((error) => {
+    })
+    .catch(error=>{
         switch (error.code) {
-          case 'auth/invalid-email':
-            alert('Email inválido. Debe contener "@".');
-            break;
-          case 'auth/wrong-password':
-            alert('Contraseña incorrecta.');
-            break;
-          case 'auth/user-not-found':
-            alert('Usuario no encontrado. Regístrate primero.');
-            break;
-          case 'auth/too-many-requests':
-            alert('Demasiados intentos fallidos. La cuenta se ha bloqueado, cambia la contraseña.');
-            break;
-          default:
-            alert('Error desconocido: ' + error.message);
-        }
-      });
-  }  
-  
-  const handleChangePassword = () => {
-    if (!email) {
-      alert('Por favor, ingrese su dirección de correo electrónico antes de solicitar el restablecimiento de contraseña.');
-    } else {
-      sendPasswordResetEmail(auth, email)
-        .then(() => {
-          alert('Se ha enviado un correo para restablecer la contraseña. Revise su bandeja de entrada.');
-        })
-        .catch((error) => {
-          alert('Error al enviar el correo para restablecer la contraseña: ' + error.message);
-        });
-    }
-  };
-
-  // Login con Google
-
-  const [accessToken, setAccessToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: " ",
-    iosClientId: " ",
-    androidClientId: " "
-  });
-
-  React.useEffect(() => {
-    if(response?.type === "success"){
-      setAccessToken(response.authentication.accessToken);
-      accessToken && fetchUserInfo();
-    }
-  }, [response, accessToken])
-
-  async function fetchUserInfo(){
-    let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-      headers: {
-        Authorization: 'Bearer ${accessToken}'
-      }
-    });
-    const useInfo = await response.json();
-    setUser(useInfo);
+            case 'auth/email-already-in-use':
+              alert('La dirección de correo electrónico ya está en uso. Inicie sesión en su cuenta o use una dirección de correo electrónico diferente.');
+              break;
+            case 'auth/invalid-email':
+              alert('La dirección de correo electrónico es inválida. Debe contener "@".');
+              break;
+            case 'auth/weak-password':
+              alert('La contraseña es demasiado débil. Intente con una contraseña más segura.');
+              break;
+            default:
+              alert('Error desconocido: ' + error.message);
+          }
+            })
+  }
+  const handleIniciarSesion = () =>{
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential)=>{
+        const usuario = userCredential.user
+        console.log('cuenta creada! Bj', usuario)
+        navigation.navigate('Tabs');
+    })
+    .catch((error) => {
+        switch (error.code) {
+            case 'auth/invalid-email':
+              alert('Email inválido. Debe contener "@".');
+              break;
+            case 'auth/wrong-password':
+              alert('Contraseña incorrecta.');
+              break;
+            case 'auth/user-not-found':
+              alert('Usuario no encontrado. Regístrate primero.');
+              break;
+            case 'auth/too-many-requests':
+              alert('Demasiados intentos fallidos. La cuenta se ha bloqueado, cambia la contraseña.');
+              break;
+            default:
+              alert('Error desconocido: ' + error.message);
+            }
+        })           
   }
 
-  const ShowUserInfo = () => {
-    if(user) {
-      return(
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{fontSize: 35, fontWeight: 'bold', marginBottom: 20}}>Bienvenido</Text>
-          <Image source={{uri: user.picture}} style={{width: 100, height: 100, borderRadius: 50}}/>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>{user.name}</Text>
-        </View>
-      )
-    }
-  }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.container} // Cambia "styles" por "style"
+      behavior="padding"
+    >
       <View style={styles.inputContainer}>
         <TextInput
-          autoCapitalize="none"
+          autoCapitalize='none'
           placeholder="Email"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={text => setEmail(text)}
           style={styles.input}
         />
         <TextInput
-          autoCapitalize="none"
+          autoCapitalize='none'
           placeholder="Contraseña"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity
-          disabled={!request}
-          onPress={() => {
-            promptAsync();
-          }}
+          onPress={handleIniciarSesion}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Login with Google</Text>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleChangePassword} style={styles.changePasswordButton}>
+
+        <TouchableOpacity
+          onPress={handleCrearCuenta}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Crear Cuenta</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={()=>{navigation.navigate('Tabs')}}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Invitado</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=>{}}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}><Icon name='github' style={styles.icon} /> Login with GitHub</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=>{}}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}><Icon name='google' style={styles.icon}/> Login with Google</Text>
+        </TouchableOpacity>
+
+        {/* 
+        <TouchableOpacity
+          onPress={handleChangePassword}
+          style={styles.changePasswordButton}
+        >
           <Text style={styles.changePasswordButtonText}>Cambiar contraseña</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleGoogleLogin}
+          style={styles.googleButton} // Agrega un estilo para el botón de Google
+        >
+          <Text style={styles.googleButtonText}>Iniciar sesión con Google</Text>
         </TouchableOpacity>
         <Text>
           No tienes una cuenta?{' '}
           <TouchableOpacity onPress={() => navigation.navigate('Registrarse')}>
             <Text style={styles.registerLink}>Regístrate!</Text>
           </TouchableOpacity>
-        </Text>
+        </Text> */}
       </View>
     </KeyboardAvoidingView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -178,6 +174,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     borderRadius: 10,
+    marginBottom: 10,
   },
   buttonText: {
     color: 'white',
@@ -185,12 +182,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  changePasswordLink: {
+  changePasswordButton: {
+    // Estilos para el botón de cambiar contraseña
+  },
+  changePasswordButtonText: {
+    // Estilos para el texto del botón de cambiar contraseña
+  },
+  googleButton: {
+    backgroundColor: 'red', // Puedes personalizar el color del botón de Google
+    width: '100%',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  googleButtonText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  registerLink: {
     color: 'blue',
     textAlign: 'center',
     marginTop: 10,
   },
+  icon:{
+    fontSize: 20,
+  }
 });
+
 
 
 export default LoginScreen
