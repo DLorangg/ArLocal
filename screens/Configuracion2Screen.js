@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Image, TextInput, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
-import { firestore, auth } from '../Firebase'; 
+import { collection, query, where, getDocs, doc, setDoc, updateDoc, getDoc, deleteDoc } from 'firebase/firestore';
+import { firestore, auth } from '../Firebase';
 
 const Configuracion2Screen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [nombreLocal, setNombreLocal] = useState("");
   const [direccionLocal, setDireccionLocal] = useState("");
   const [categoriaLocal, setCategoriaLocal] = useState("");
-  const [permitirCreacion, setPermitirCreacion] = useState("");
+  const [localCreado, setLocalCreado] = useState(false);
 
-  //Funcion para obtener UID de usuario
   const obtenerUIDUsuario = () => {
     const usuarioActual = auth.currentUser;
     if (usuarioActual) {
@@ -19,7 +18,6 @@ const Configuracion2Screen = () => {
     }
   }
 
-  // Función para abrir el selector de imágenes de la galería
   const seleccionarImagen = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -27,67 +25,125 @@ const Configuracion2Screen = () => {
       aspect: [4, 3],
       quality: 1,
     });
-  
+
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
     }
-  };  
+  };
 
-  // Función para guardar los datos en Firestore
   const guardarLocal = async () => {
     try {
       const localData = {
         Nombre: nombreLocal,
         Dirección: direccionLocal,
         Categoria: categoriaLocal,
-        Img: selectedImage, 
+        Img: selectedImage,
         UID: obtenerUIDUsuario()
       };
 
-      // Crea una referencia al documento del nuevo local
       const newLocalRef = doc(collection(firestore, 'local'));
 
-      // Agrega los datos del nuevo local al documento
       await setDoc(newLocalRef, localData);
 
-      // Limpia los campos y la imagen seleccionada
       setNombreLocal("");
       setDireccionLocal("");
       setCategoriaLocal("");
       setSelectedImage(null);
-      alert("Local creado correctamente")
+      alert("Local creado correctamente");
+      setLocalCreado(true);
     } catch (error) {
-      alert("Error al crear local. Intente de nuevo en unos minutos")
+      alert("Error al crear local. Intente de nuevo en unos minutos");
       console.error('Error al guardar el local: ', error);
     }
   };
 
-  //Funcion para verificar si el usuario creó un local
+  const actualizarLocal = async () => {
+    try {
+      const uidUsuario = obtenerUIDUsuario();
+
+      // Buscar el local correspondiente al UID del usuario
+      const localesCollection = collection(firestore, 'local');
+      const q = query(localesCollection, where('UID', '==', uidUsuario));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        // Obtener el ID del documento del primer resultado (debería haber solo uno)
+        const localDocId = querySnapshot.docs[0].id;
+
+        // Referenciar el documento del local
+        const localDocRef = doc(localesCollection, localDocId);
+
+        // Obtener los datos actuales del local
+        const localDocSnap = await getDoc(localDocRef);
+        const localData = localDocSnap.data();
+
+        // Actualizar el local con los nuevos datos
+        await updateDoc(localDocRef, {
+          Nombre: nombreLocal || localData.Nombre,
+          Dirección: direccionLocal || localData.Dirección,
+          Categoria: categoriaLocal || localData.Categoria,
+          Img: selectedImage || localData.Img,
+        });
+
+        alert("Local actualizado correctamente");
+      } else {
+        alert("No se encontró el local para actualizar");
+      }
+    } catch (error) {
+      alert("Error al actualizar el local. Intente de nuevo en unos minutos");
+      console.error('Error al actualizar el local: ', error);
+    }
+  };
+
+  const borrarLocal = async () => {
+    try {
+      const uidUsuario = obtenerUIDUsuario();
+  
+      // Buscar el local correspondiente al UID del usuario
+      const localesCollection = collection(firestore, 'local');
+      const q = query(localesCollection, where('UID', '==', uidUsuario));
+      const querySnapshot = await getDocs(q);
+  
+      if (!querySnapshot.empty) {
+        // Obtener el ID del documento del primer resultado (debería haber solo uno)
+        const localDocId = querySnapshot.docs[0].id;
+  
+        // Referenciar y borrar el documento del local
+        await deleteDoc(doc(localesCollection, localDocId));
+  
+        alert("Local borrado correctamente");
+        setLocalCreado(false);
+      } else {
+        alert("No se encontró el local para borrar");
+      }
+    } catch (error) {
+      alert("Error al borrar el local. Intente de nuevo en unos minutos");
+      console.error('Error al borrar el local: ', error);
+    }
+  };
+  
   const verificarUIDEnFirestore = async (UID) => {
-    const localesCollection = collection(firestore, 'local'); 
-    const q = query(localesCollection, where('uid', '==', UID)); 
+    const localesCollection = collection(firestore, 'local');
+    const q = query(localesCollection, where('UID', '==', UID));
   
     const querySnapshot = await getDocs(q);
   
-    return !querySnapshot.empty; // Retorna true si el UID existe en algún objeto de la colección
+    return !querySnapshot.empty;
   };
+  
 
   useEffect(() => {
     verificarUIDEnFirestore(obtenerUIDUsuario())
       .then((existeUID) => {
-        if (existeUID) {
-          setPermitirCreacion(false);
-        }
+        setLocalCreado(existeUID);
       })
       .catch((error) => {
         console.error('Error al verificar el UID en Firestore: ', error);
       });
   }, [obtenerUIDUsuario()]);
 
-  //Permisos para fotos
   useEffect(() => {
     (async () => {
-      // Solicitar permiso de acceso a la galería
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         alert('Se requieren permisos para acceder a la galería.');
@@ -97,45 +153,73 @@ const Configuracion2Screen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      
-      {permitirCreacion ? ( //Al no tener creado un local
+      {localCreado ? (
+        // Formulario para actualizar y borrar el local
         <>
-          <Button title="Seleccionar Imagen" onPress={seleccionarImagen} />
-  
+          <Button title="Seleccionar nueva Imagen" onPress={seleccionarImagen} />
+
           {selectedImage && (
             <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />
           )}
-  
+
+          <TextInput
+            style={styles.input}
+            placeholder="Nuevo nombre del Local"
+            value={nombreLocal}
+            onChangeText={(text) => setNombreLocal(text)}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Nueva dirección del Local"
+            value={direccionLocal}
+            onChangeText={(text) => setDireccionLocal(text)}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Nueva categoria del Local"
+            value={categoriaLocal}
+            onChangeText={(text) => setCategoriaLocal(text)}
+          />
+
+          <Button title="Actualizar Local" onPress={actualizarLocal} />
+          <Button title="Borrar Local" onPress={borrarLocal} />
+        </>
+      ) : (
+        <>
+          <Button title="Seleccionar Imagen" onPress={seleccionarImagen} />
+
+          {selectedImage && (
+            <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />
+          )}
+
           <TextInput
             style={styles.input}
             placeholder="Nombre del Local"
             value={nombreLocal}
             onChangeText={(text) => setNombreLocal(text)}
           />
-  
+
           <TextInput
             style={styles.input}
             placeholder="Dirección del Local"
             value={direccionLocal}
             onChangeText={(text) => setDireccionLocal(text)}
           />
-  
+
           <TextInput
             style={styles.input}
             placeholder="Categoría del Local"
             value={categoriaLocal}
             onChangeText={(text) => setCategoriaLocal(text)}
           />
-  
-          <Button title="Guardar Local" onPress={guardarLocal} />
-        </>
-      ) : (
-        //Al tener creado un local
-        <>
+
+          <Button title="Crear Local" onPress={guardarLocal} />
         </>
       )}
     </ScrollView>
-  );  
+  );
 };
 
 const styles = StyleSheet.create({
