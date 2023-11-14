@@ -8,6 +8,10 @@ const BuscadorScreen = () => {
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [tipoSeleccionado, setTipoSeleccionado] = useState('nombre');
 
+  const abrirDetalleLocal = ()=>{
+    navigation.navigate('LocalScreen');
+  }
+
   const handleActualizarTextoBusqueda = (nuevoTexto) => {
     setTextoBusqueda(nuevoTexto);
   };
