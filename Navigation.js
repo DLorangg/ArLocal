@@ -121,10 +121,10 @@ function MyStack(){
                 name="Local"
                 component={Configuracion2Screen}
             />
-            <ConfiguracionStackNavigator.Screen
+            {/* <ConfiguracionStackNavigator.Screen
                 name="Configuracion3"
                 component={Configuracion3Screen}
-            />
+            /> */}
 
         </ConfiguracionStackNavigator.Navigator>
     )
@@ -147,7 +147,7 @@ function MyTabs() {
 
             }}
         >
-            <Tab.Screen 
+            {/* <Tab.Screen 
                 name="Favoritos" 
                 component={FavoritosScreen}
                 options={{
@@ -158,7 +158,7 @@ function MyTabs() {
                     ),
                     headerShown: false
                 }}
-            />
+            /> */}
             <Tab.Screen 
                 name="Camara" 
                 component={CamaraScreen}
