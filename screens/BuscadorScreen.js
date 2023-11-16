@@ -8,6 +8,10 @@ const BuscadorScreen = () => {
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [tipoSeleccionado, setTipoSeleccionado] = useState('nombre');
 
+  const abrirDetalleLocal = ()=>{
+    navigation.navigate('LocalScreen');
+  }
+
   const handleActualizarTextoBusqueda = (nuevoTexto) => {
     setTextoBusqueda(nuevoTexto);
   };
@@ -24,7 +28,7 @@ const BuscadorScreen = () => {
     <View>
       <BarraBusqueda actualizarTextoBusqueda={handleActualizarTextoBusqueda} />
       {/* Agrega elementos para permitir al usuario seleccionar el tipo de búsqueda */}
-      <LocalesList busqueda={textoBusqueda} tipoBusqueda={tipoSeleccionado} />
+      <LocalesList busqueda={textoBusqueda} tipoBusqueda={tipoSeleccionado} abrirDetalleLocal={abrirDetalleLocal}/>
     </View>
   );
 };
