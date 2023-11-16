@@ -156,11 +156,11 @@ function MyTabs() {
             screenOptions={{
                 tabBarActiveTintColor: '#519955',
                 tabBarInactiveTintColor: '#6EE674',
-                tabBarStyle: { backgroundColor:'#5C4999', height: 62}
+                tabBarStyle: { backgroundColor:'#5C4999', height: 75}
 
             }}
         >
-            <Tab.Screen 
+            {/*<Tab.Screen 
                 name="Favoritos" 
                 component={FavoritosScreen}
                 options={{
@@ -171,7 +171,7 @@ function MyTabs() {
                     ),
                     headerShown: false
                 }}
-            />
+            />*/}
             <Tab.Screen 
                 name="Camara" 
                 component={CamaraScreen}
