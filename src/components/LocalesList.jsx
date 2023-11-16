@@ -45,9 +45,5 @@ const LocalesList = ({ busqueda, tipoSeleccionado, abrirDetalleLocal }) => {
   );
 };
 
-<<<<<<< HEAD
-export default LocalesList;
-=======
-export default LocalesList;
 
->>>>>>> MathuteNative
+export default LocalesList;
