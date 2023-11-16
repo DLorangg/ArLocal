@@ -23,7 +23,6 @@ import BuscadorScreen from "./screens/BuscadorScreen";
 import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
-import Configuracion3Screen from "./screens/Configuracion3Screen";
 import LocalScreen from "./screens/LocalScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -161,7 +160,7 @@ function MyTabs() {
 
             }}
         >
-            {/* <Tab.Screen 
+            <Tab.Screen 
                 name="Favoritos" 
                 component={FavoritosScreen}
                 options={{
@@ -172,7 +171,7 @@ function MyTabs() {
                     ),
                     headerShown: false
                 }}
-            /> */}
+            />
             <Tab.Screen 
                 name="Camara" 
                 component={CamaraScreen}
