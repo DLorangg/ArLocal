@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, Image, TextInput, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { collection, query, where, getDocs, doc, setDoc, updateDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { firestore, auth } from '../Firebase';
@@ -153,88 +153,148 @@ const Configuracion2Screen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {localCreado ? (
-        // Formulario para actualizar y borrar el local
-        <>
-          <Button title="Seleccionar nueva Imagen" onPress={seleccionarImagen} />
-
-          {selectedImage && (
-            <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />
-          )}
-
-          <TextInput
-            style={styles.input}
-            placeholder="Nuevo nombre del Local"
-            value={nombreLocal}
-            onChangeText={(text) => setNombreLocal(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Nueva dirección del Local"
-            value={direccionLocal}
-            onChangeText={(text) => setDireccionLocal(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Nueva categoria del Local"
-            value={categoriaLocal}
-            onChangeText={(text) => setCategoriaLocal(text)}
-          />
-
-          <Button title="Actualizar Local" onPress={actualizarLocal} />
-          <Button title="Borrar Local" onPress={borrarLocal} />
-        </>
-      ) : (
-        <>
-          <Button title="Seleccionar Imagen" onPress={seleccionarImagen} />
-
-          {selectedImage && (
-            <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />
-          )}
-
-          <TextInput
-            style={styles.input}
-            placeholder="Nombre del Local"
-            value={nombreLocal}
-            onChangeText={(text) => setNombreLocal(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Dirección del Local"
-            value={direccionLocal}
-            onChangeText={(text) => setDireccionLocal(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Categoría del Local"
-            value={categoriaLocal}
-            onChangeText={(text) => setCategoriaLocal(text)}
-          />
-
-          <Button title="Crear Local" onPress={guardarLocal} />
-        </>
-      )}
+      <View style={styles.content}>
+        {localCreado ? (
+          // Formulario para actualizar y borrar el local
+          <>
+            <Button title="Seleccionar nueva Imagen" onPress={seleccionarImagen} style={styles.button} />
+  
+            {selectedImage && (
+              <Image source={{ uri: selectedImage }} style={styles.image} />
+            )}
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Nuevo nombre del Local"
+              value={nombreLocal}
+              onChangeText={(text) => setNombreLocal(text)}
+            />
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Nueva dirección del Local"
+              value={direccionLocal}
+              onChangeText={(text) => setDireccionLocal(text)}
+            />
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Nueva categoría del Local"
+              value={categoriaLocal}
+              onChangeText={(text) => setCategoriaLocal(text)}
+            />
+  
+            <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={actualizarLocal}
+            >
+              <Text style={styles.buttonText}>Actualizar Local</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={borrarLocal}
+            >
+              <Text style={styles.buttonText}>Borrar Local</Text>
+            </TouchableOpacity>
+            </View>
+          </>
+        ) : (
+          // Formulario para crear un nuevo local
+          <>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={seleccionarImagen}
+              >
+              <Text style={styles.buttonText}>Seleccionar Imagen</Text>
+            </TouchableOpacity>
+  
+            {selectedImage && (
+              <Image source={{ uri: selectedImage }} style={styles.image} />
+            )}
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Nombre del Local"
+              value={nombreLocal}
+              onChangeText={(text) => setNombreLocal(text)}
+            />
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Dirección del Local"
+              value={direccionLocal}
+              onChangeText={(text) => setDireccionLocal(text)}
+            />
+  
+            <TextInput
+              style={styles.input}
+              placeholder="Categoría del Local"
+              value={categoriaLocal}
+              onChangeText={(text) => setCategoriaLocal(text)}
+            />
+  
+            <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={guardarLocal}
+            >
+              <Text style={styles.buttonText}>Crear Local</Text>
+            </TouchableOpacity>
+            </View>
+          </>
+        )}
+      </View>
     </ScrollView>
   );
-};
-
-const styles = StyleSheet.create({
+  };
+  
+  const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
-    backgroundColor: "#292929",
+    justifyContent: 'center',
+    paddingVertical: 20,
+    backgroundColor: "#5c4999",
+  },
+  content: {
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
-    width: '80%',
-    height: 40,
-    borderWidth: 1,
+    width: '100%',
+    marginBottom: 10,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center', // Añadir alineación al centro
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#6ee674',
+    width: 200,
+    height: 50,
     padding: 10,
-    marginVertical: 10,
-    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
   },
 });
 

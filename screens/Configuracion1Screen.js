@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { auth } from '../Firebase';
 import { getAuth, updatePassword, signOut } from "firebase/auth";
@@ -42,51 +42,72 @@ const Configuracion1Screen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Email asociado: {auth.currentUser?.email}</Text>
+    <Text style={styles.emailTitle}>Correo Electrónico Asociado:</Text>
+    <Text style={styles.emailText}>{auth.currentUser?.email}</Text>
 
-      {showForm ? (
-        <View>
-          {/* Formulario para cambiar la contraseña */}
-          <TextInput
-            placeholder="Nueva contraseña"
-            secureTextEntry
-            value={newPassword}
-            onChangeText={(text) => setNewPassword(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Confirmar nueva contraseña"
-            secureTextEntry
-            value={confirmPassword}
-            onChangeText={(text) => setConfirmPassword(text)}
-            style={styles.input} 
-          />
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      ) : null}
+    {showForm ? (
+      <View>
+        {/* Formulario para cambiar la contraseña */}
+        <TextInput
+          placeholder="Nueva contraseña"
+          secureTextEntry
+          value={newPassword}
+          onChangeText={(text) => setNewPassword(text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Confirmar nueva contraseña"
+          secureTextEntry
+          value={confirmPassword}
+          onChangeText={(text) => setConfirmPassword(text)}
+          style={styles.input} 
+        />
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    ) : null}
 
-      <Button
-        title={showForm ? "Confirmar cambio" : "Cambiar contraseña"}
-        onPress={() => {
-          if (showForm) {
-            handleChangePassword(); // Ejecuta la función si se muestra el formulario
-          } else {
-            setShowForm(true); // Muestra el formulario si no está visible
-          }
-        }}
-      />
+    <TouchableOpacity
+      style={showForm ? styles.confirmButton : styles.changePasswordButton}
+      onPress={() => {
+        if (showForm) {
+          handleChangePassword(); // Ejecuta la función si se muestra el formulario
+        } else {
+          setShowForm(true); // Muestra el formulario si no está visible
+        }
+      }}
+    >
+      <Text style={styles.buttonText}>{showForm ? "Confirmar Cambio" : "Cambiar Contraseña"}</Text>
+    </TouchableOpacity>
 
-      <Button
-        title="Cerrar sesión"
-        onPress={() => handleSignOut()}
-      />
-    </View>
+    <TouchableOpacity
+      style={styles.signOutButton}
+      onPress={() => handleSignOut()}
+    >
+      <Text style={styles.buttonText}>Cerrar Sesión</Text>
+    </TouchableOpacity>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#292929" },
-  title: { fontSize: 25, color: "#fff" },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#5c4999", // Cambio del color de fondo
+    padding: 20,
+  },
+  emailTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#fff', // Cambio de color del texto
+  },
+  emailText: {
+    fontSize: 16,
+    marginBottom: 20,
+    color: '#fff', // Cambio de color del texto
+  },
   input: {
     width: 300,
     height: 40,
@@ -94,12 +115,40 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginTop: 10,
     paddingLeft: 10,
-    color: "#fff", 
+    color: "#fff",
   },
   errorText: {
     color: 'red',
     marginTop: 10,
-  }
+    color: '#fff', // Cambio de color del texto
+  },
+  confirmButton: {
+    backgroundColor: '#6ee674', // Color de fondo para Confirmar Cambio
+    width: 300,
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  changePasswordButton: {
+    backgroundColor: '#4a90e2', // Color de fondo para Cambiar Contraseña
+    width: 300,
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  signOutButton: {
+    backgroundColor: '#e24a4a', // Color de fondo para Cerrar Sesión
+    width: 300,
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
-
 export default Configuracion1Screen;
