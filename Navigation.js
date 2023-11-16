@@ -112,12 +112,12 @@ function MyStack(){
         //2) Debe Navigator contener Screen elementos como sus hijos para definir la configuración de las rutas.
         /* 2) dentro de "Navigator" se definen todas las rutas que contendra este componente.
         Estas rutas se especifican utilizando "Screen"*/
-        <ConfiguracionStackNavigator.Navigator initialRouteName="Configuraciones">
+        <ConfiguracionStackNavigator.Navigator initialRouteName="ConfiguracionesStack">
             {/*2) esta primer screen esta como ruta inicial (initialRouteName="Configuraciones") por lo que sera la que se vera al renderizar este componente.
             en este caso, esta primer screen renderiza en su componente (ConfiguracionesScreen) botones que te permiten navegar por las demas rutas definidas*/}
             <ConfiguracionStackNavigator.Screen
                 //2) nombre de la ruta que usaremos para navegar
-                name="Configuraciones"
+                name="ConfiguracionesStack"
                 //2) component corresponde al componente que representará ese Screen
                 component={ConfiguracionesScreen}
                 //2)entonces, la Configuraciones ruta corresponde al ConfiguracionesScreen componente
