@@ -24,7 +24,7 @@ const LocalesItem = (props) => {
 
   return (
     <TouchableOpacity
-     onPress={props.abrirDetalleLocal}
+     onPress={props.abrirDetalleLocal(props.DocumentID)}
     >
     <View key={props.DocumentID} style={styles.contenedor}>
       <Image style={styles.imagen} source={{ uri: props.Img }} />

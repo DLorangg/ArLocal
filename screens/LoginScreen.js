@@ -77,55 +77,13 @@ const LoginScreen = () => {
       });
   };
 
-  
-
-    // Login con Google sin Firebase 
-
-    // const [accessToken, setAccessToken] = React.useState(null);
-    // const [user, setUser] = React.useState(null);
-    // const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    //   clientId: " ",
-    //   iosClientId: " ",
-    //   androidClientId: " "
-    // });
-  
-    // React.useEffect(() => {
-    //   if(response?.type === "success"){
-    //     setAccessToken(response.authentication.accessToken);
-    //     accessToken && fetchUserInfo();
-    //   }
-    // }, [response, accessToken])
-
-    // Este es el otro login Con Google Siguiendo la Documentacion de Firebase que tiene Expo
-
-    // GoogleSignin.configure ({
-    //   webClienId: '',
-    // });
-
-    // const onGoogleButtonPress = async () => {
-    //   // Check if your device supports Google play
-    //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    //   // Get the users Id token
-    //   const { id_token } = await GoogleSignin.signIn();
-
-    //   // Create a Google credential with the token
-    //   const user_sing_in = auth().signWithCredential(googleCredential);
-    //   user_sing_in
-    //     .then((user) => {
-    //       console.log(user);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     })
-    // }
-    
-
 
   return (
     <KeyboardAvoidingView
       style={styles.container} // Cambia "styles" por "style"
       behavior="padding"
     >
+      <Text style={styles.buttonText}>Inicar Sesión!</Text>
       <View style={styles.inputContainer}>
         <TextInput
           autoCapitalize='none'
@@ -166,38 +124,7 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonText}>Invitado</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={()=>{}}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}><Icon name='github' style={styles.icon} /> Login with GitHub</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={()=>{}}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}><Icon name='google' style={styles.icon}/> Login with Google</Text>
-        </TouchableOpacity>
 
-        {/* 
-        <TouchableOpacity
-          onPress={handleChangePassword}
-          style={styles.changePasswordButton}
-        >
-          <Text style={styles.changePasswordButtonText}>Cambiar contraseña</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleGoogleLogin}
-          style={styles.googleButton} // Agrega un estilo para el botón de Google
-        >
-          <Text style={styles.googleButtonText}>Iniciar sesión con Google</Text>
-        </TouchableOpacity>
-        <Text>
-          No tienes una cuenta?{' '}
-          <TouchableOpacity onPress={() => navigation.navigate('Registrarse')}>
-            <Text style={styles.registerLink}>Regístrate!</Text>
-          </TouchableOpacity>
-        </Text> */}
       </View>
     </KeyboardAvoidingView>
   );
@@ -205,6 +132,7 @@ const LoginScreen = () => {
 
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     justifyContent: 'center',
