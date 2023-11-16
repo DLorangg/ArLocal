@@ -24,14 +24,27 @@ import CamaraScreen from "./screens/CamaraScreen";
 import Configuracion1Screen from "./screens/Configuracion1Screen";
 import Configuracion2Screen from "./screens/Configuracion2Screen";
 import Configuracion3Screen from "./screens/Configuracion3Screen";
-
+import LocalScreen from "./screens/LocalScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegistrarseScreen from "./screens/RegistrarseScreen";
 //------------------------------------------------------------------
 //#endregion
+//todas las hueas de locales ya estoy re mareada zzzzZz
+//#region 
+const HadleLocales = createNativeStackNavigator();
+function Locales(){
+    return(
+            <HadleLocales.Navigator initialRouteName="BuscadorScreen">
+                <HadleLocales.Screen options={{headerShown: false}} name="BuscadorScreen" component={BuscadorScreen} />
+                <HadleLocales.Screen options={{headerShown: false}} name="LocalScreen" component={LocalScreen} />
+            </HadleLocales.Navigator>
+    )
+}
+//#endregion
 
-//pantalla de login
+
+//pantalla de login!
 //#region 
 const Stack = createNativeStackNavigator();
 
@@ -85,7 +98,8 @@ function Login(){
 // }
 
 //#endregion
-//pantalla de configuraciones con su stack (pila) de configuraciones [hasta ahora hay tres que no hacen nada lol]
+
+//pantalla de configuraciones con su stack (pila) de configuraciones! [hasta ahora hay tres que no hacen nada lol]
 //#region 
 
 //1) ----------------------createNativeStackNavigator-----------------------------------------
@@ -131,7 +145,7 @@ function MyStack(){
 }
 //#endregion
 
-//Navegador de pestañas inferior
+//Navegador de pestañas inferior!
 //#region 
 //3) ----------------------createBottomTabNavigator-----------------------------------------
 //3) "createBottomTabNavigator" una función que devuelve un objeto que contiene 2 propiedades: Screen y Navigator. y crea Una barra de pestañas simple en la parte inferior de la pantalla que te permite cambiar entre diferentes rutas. 
@@ -173,7 +187,7 @@ function MyTabs() {
             />
             <Tab.Screen 
                 name="Buscar" 
-                component={BuscadorScreen}
+                component={Locales}
                 options={{
                     tabBarLabel: "",
                     tabBarIcon: ({color, size})=>(
