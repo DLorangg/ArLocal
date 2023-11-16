@@ -2,66 +2,65 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View, TouchableOpaci
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome as Icon } from "@expo/vector-icons"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { signInAnonymously } from 'firebase/auth';
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
 
 const LoginScreen = () => {
   const navigation = useNavigation(); // Obtiene la instancia de navegación
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  const handleCrearCuenta = () =>{
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential)=>{
-        const usuario = userCredential.user
-        console.log('cuenta creada! Bj', usuario)
-        navigation.navigate('Tabs');
+
+  useEffect(() => {
+    const noAutenticado = auth.onAuthStateChanged(user => {
+      if (user) {
+        navigation.replace('Tabs')
+      }
     })
-    .catch(error=>{
-        switch (error.code) {
-            case 'auth/email-already-in-use':
-              alert('La dirección de correo electrónico ya está en uso. Inicie sesión en su cuenta o use una dirección de correo electrónico diferente.');
-              break;
-            case 'auth/invalid-email':
-              alert('La dirección de correo electrónico es inválida. Debe contener "@".');
-              break;
-            case 'auth/weak-password':
-              alert('La contraseña es demasiado débil. Intente con una contraseña más segura.');
-              break;
-            default:
-              alert('Error desconocido: ' + error.message);
-          }
-            })
-  }
-  const handleIniciarSesion = () =>{
+
+    return noAutenticado
+  }, [])
+
+  const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential)=>{
-        const usuario = userCredential.user
-        console.log('cuenta creada! Bj', usuario)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log('Inicio sesión con:', user.email);
         navigation.navigate('Tabs');
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         switch (error.code) {
-            case 'auth/invalid-email':
-              alert('Email inválido. Debe contener "@".');
-              break;
-            case 'auth/wrong-password':
-              alert('Contraseña incorrecta.');
-              break;
-            case 'auth/user-not-found':
-              alert('Usuario no encontrado. Regístrate primero.');
-              break;
-            case 'auth/too-many-requests':
-              alert('Demasiados intentos fallidos. La cuenta se ha bloqueado, cambia la contraseña.');
-              break;
-            default:
-              alert('Error desconocido: ' + error.message);
-            }
-        })           
-  }
+          case 'auth/invalid-email':
+            alert('Email inválido. Debe contener "@".');
+            break;
+          case 'auth/wrong-password':
+            alert('Contraseña incorrecta.');
+            break;
+          case 'auth/user-not-found':
+            alert('Usuario no encontrado. Regístrate primero.');
+            break;
+          case 'auth/too-many-requests':
+            alert('Demasiados intentos fallidos. La cuenta se ha bloqueado, cambia la contraseña.');
+            break;
+          default:
+            alert('Error desconocido: ' + error.message);
+        }
+      });
+  }  
+  
+  const handleChangePassword = () => {
+    if (!email) {
+      alert('Por favor, ingrese su dirección de correo electrónico antes de solicitar el restablecimiento de contraseña.');
+    } else {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert('Se ha enviado un correo para restablecer la contraseña. Revise su bandeja de entrada.');
+        })
+        .catch((error) => {
+          alert('Error al enviar el correo para restablecer la contraseña: ' + error.message);
+        });
+    }
+  };
 
   const handleInvitado = () => {
     signInAnonymously(auth)
@@ -77,13 +76,12 @@ const LoginScreen = () => {
       });
   };
 
-
   return (
+
     <KeyboardAvoidingView
-      style={styles.container} // Cambia "styles" por "style"
+      style={styles.container}
       behavior="padding"
     >
-      <Text style={styles.buttonText}>Inicar Sesión!</Text>
       <View style={styles.inputContainer}>
         <TextInput
           autoCapitalize='none'
@@ -103,19 +101,11 @@ const LoginScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-
         <TouchableOpacity
-          onPress={handleIniciarSesion}
+          onPress={handleLogin}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Iniciar Sesión</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Registrarse')}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Crear Cuenta</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -124,15 +114,25 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonText}>Invitado</Text>
         </TouchableOpacity>
-
+        
+        <TouchableOpacity
+          onPress={handleChangePassword}
+          style={styles.changePasswordButton}
+        >
+          <Text style={styles.changePasswordButtonText}>Cambiar contraseña</Text>
+        </TouchableOpacity>
+        <Text>
+          No tienes una cuenta?{' '}
+          <TouchableOpacity onPress={() => navigation.navigate('Registrarse')}>
+            <Text style={styles.registerLink}>Regístrate!</Text>
+          </TouchableOpacity>
+        </Text>
       </View>
     </KeyboardAvoidingView>
   );
 };
 
-
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     justifyContent: 'center',
