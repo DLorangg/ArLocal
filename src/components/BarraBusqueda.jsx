@@ -17,6 +17,7 @@ const BarraBusqueda = ({ actualizarTextoBusqueda }) => {
         <TextInput
           style={styles.input}
           placeholder="Buscar por nombre"
+          placeholderTextColor="#FFFFFF"  // Agregado para cambiar el color del texto del placeholder
           onChangeText={handleActualizarTexto}
           value={nombre}
         />
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#9C85E6',
     flex: 1,
+    color: '#FFFFFF',  // Agregado para cambiar el color del texto de entrada
   },
   inputContainer: {
     flexDirection: 'row',
