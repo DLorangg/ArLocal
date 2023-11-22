@@ -110,12 +110,12 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginTop: 10,
-    paddingLeft: 10,
-    color: "#fff",
+    marginBottom: 10,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
   },
   errorText: {
     color: 'red',

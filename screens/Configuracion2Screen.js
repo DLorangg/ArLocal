@@ -157,7 +157,12 @@ const Configuracion2Screen = () => {
         {localCreado ? (
           // Formulario para actualizar y borrar el local
           <>
-            <Button title="Seleccionar nueva Imagen" onPress={seleccionarImagen} style={styles.button} />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={seleccionarImagen}
+              >
+              <Text style={styles.buttonText}>Seleccionar Imagen</Text>
+            </TouchableOpacity>
   
             {selectedImage && (
               <Image source={{ uri: selectedImage }} style={styles.image} />
@@ -287,7 +292,7 @@ const Configuracion2Screen = () => {
     justifyContent: 'center',
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 19,
     color: 'white',
     fontWeight: 'bold',
   },
