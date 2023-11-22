@@ -119,15 +119,14 @@ const LoginScreen = () => {
           onPress={handleChangePassword}
           style={styles.changePasswordButton}
         >
-          <Text style={styles.changePasswordButtonText}>Cambiar contraseña</Text>
+          <Text style={styles.changePasswordButtonText}>Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
-        <Text>
-          No tienes una cuenta?{' '}
-          <TouchableOpacity onPress={() => navigation.navigate('Registrarse')}>
-            <Text style={styles.registerLink}>Regístrate!</Text>
-          </TouchableOpacity>
-        </Text>
-      </View>
+        </View>
+        <View style={styles.iniciar}>
+        <TouchableOpacity onPress={() => navigation.navigate('Registrarse')}>
+          <Text style={styles.registerLink}>No tienes una cuenta? Registrate</Text>
+        </TouchableOpacity>
+        </View>
     </KeyboardAvoidingView>
   );
 };
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     // Estilos para el botón de cambiar contraseña
   },
   changePasswordButtonText: {
-    // Estilos para el texto del botón de cambiar contraseña
+    color: '#fff'
   },
   googleButton: {
     backgroundColor: 'red', // Puedes personalizar el color del botón de Google
@@ -189,12 +188,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   registerLink: {
-    color: 'blue',
+    color: 'white',
     textAlign: 'center',
     marginTop: 10,
   },
   icon:{
     fontSize: 20,
+  },
+  nocuenta: {
+    color: '#fff'
   }
 });
 

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { useNavigation } from '@react-navigation/native'
 
 const CamaraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("No escaneado");
+  const navigation = useNavigation();
 
   const pedirPermisos = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -22,6 +24,8 @@ const CamaraScreen = () => {
     setScanned(true);
     setText(data);
     console.log("Tipo: " + type + "\nData: " + data);
+    // Redirigir a la pantalla del local con el ID obtenido del código QR
+    navigation.navigate('LocalScreen', { localId: data });
   };
 
   // Confirmar permisos y retornar pantalla

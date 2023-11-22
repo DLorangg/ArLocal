@@ -3,22 +3,24 @@ import { Text, FlatList } from 'react-native';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { firestore } from '../../Firebase';
 import LocalesItem from './LocalesItem';
+import { useNavigation } from '@react-navigation/native';
 
-const LocalesList = ({ busqueda, tipoSeleccionado, abrirDetalleLocal }) => {
+const LocalesList = ({ busqueda, tipoSeleccionado }) => {
   const [locales, setLocales] = useState([]);
 
   useEffect(() => {
     const localCollection = collection(firestore, 'local');
     const orderedQuery = query(localCollection, orderBy('Nombre'));
-
+  
     const unsubscribe = onSnapshot(orderedQuery, (querySnapshot) => {
       const localesData = [];
       querySnapshot.forEach((doc) => {
-        localesData.push(doc.data());
+        const codigoQR = doc.id;  // Utiliza el ID único de Firestore como valor del código QR
+        localesData.push({ ...doc.data(), id: doc.id, codigoQR });
       });
       setLocales(localesData);
     });
-
+  
     // Limpiar la suscripción cuando el componente se desmonta
     return () => unsubscribe();
   }, []);
@@ -36,14 +38,21 @@ const LocalesList = ({ busqueda, tipoSeleccionado, abrirDetalleLocal }) => {
     }
   });
 
+  const navigation = useNavigation();
+
+  const abrirDetalleLocal = (local) => {
+    navigation.navigate('LocalScreen', { local });
+  };
+
   return (
     <FlatList
       data={localesFiltrados}
       ItemSeparatorComponent={() => <Text></Text>}
-      renderItem={({ item: local }) => <LocalesItem abrirDetalleLocal={abrirDetalleLocal} {...local} />}
+      renderItem={({ item: local }) => (
+        <LocalesItem abrirDetalleLocal={() => abrirDetalleLocal(local)} {...local} />
+      )}
     />
   );
 };
-
 
 export default LocalesList;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as Font from 'expo-font';
 import { Text, View, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
 const LocalesItem = (props) => {
   // Fuentes

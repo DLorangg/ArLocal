@@ -62,10 +62,10 @@ const RegistrarseScreen = () => {
         >
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
+      </View>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.registerLink}>¿Ya tienes una cuenta? Inicia sesión</Text>
         </TouchableOpacity>
-      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
   },
   registerLink: {
     color: 'white',
-    textDecorationLine: 'underline',
     marginTop: 10,
   },
 });
